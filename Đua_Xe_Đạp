@@ -18,7 +18,6 @@ class VDV{
         if(gio.charAt(2) != ':') gio = '0' + gio;
         this.h = Integer.parseInt(gio.substring(0,2)) - 6;
         this.phut = Integer.parseInt(gio.substring(3));
-//        double x = ;
         this.v = Math.round(120 / (h + (double) phut/60));
     }
     public int getgio(){
