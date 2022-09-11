@@ -1,0 +1,43 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.Collections;
+import java.util.Comparator;
+
+class MH{
+    private String ma, ten, dv;
+    private int mua, ban, loi;
+    public MH(int i,String ten, String dv, int mua, int ban){
+        if(i < 10) this.ma = "MH00" + (char)(i + '0');
+        else this.ma = "MH0" + Integer.toString(i);
+        this.ten = ten;
+        this.dv = dv;
+        this.mua = mua;
+        this.ban = ban;
+        this.loi = this.ban - this.mua;
+    }
+    public int getloi(){
+        return loi;
+    }
+    public String out(){
+        return ma + " " + ten + " " + dv + " " + mua + " " + ban + " " + loi;
+    }
+}
+public class Triangle {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ArrayList<MH> a = new ArrayList<>();
+        int n = sc.nextInt();
+        for(int i = 1; i <= n; i++){
+            sc.nextLine();
+            a.add(new MH(i,sc.nextLine(), sc.next(), sc.nextInt(),sc.nextInt()));
+        }
+        Collections.sort(a, new Comparator<MH>() {
+            @Override
+            public int compare(MH a, MH b){
+                return b.getloi() - a.getloi();
+            }
+        });
+        for(MH x : a)
+            System.out.println(x.out());
+    }
+}
