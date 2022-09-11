@@ -1,0 +1,62 @@
+package javaapplication1;
+import java.util.*;
+
+class SV
+{
+    private String ten, loai;
+    private double diem;
+    private int so;
+    public SV(int i, String ten, double TBC, int RL){
+        this.ten = ten;
+        this.so = i;
+        if(TBC >= 3.6 && RL >= 90) this.loai = "XUATSAC";
+        else if(TBC >= 3.2 && RL >= 80) this.loai = "GIOI";
+        else if(TBC >= 2.5 && RL >= 70) this.loai = "KHA";
+        else this.loai = "KHONG";
+        this.diem = TBC;
+//        this.rank = "";
+    }
+    public double getdiem(){
+        return diem;
+    }
+    public String getrank(){
+        return loai;
+    }
+    public void setrank(){
+        this.loai = "KHONG";
+    }
+    public int getso(){
+        return so;
+    }
+    public String out(){
+        return ten + ": " + loai;
+    }
+}
+public class Test{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt(), m = sc.nextInt();
+        ArrayList<SV> a = new ArrayList<>();
+        for(int i = 1; i <= n; i++){
+            sc.nextLine();
+            a.add(new SV(i, sc.nextLine(), sc.nextDouble(), sc.nextInt()));
+        }
+        Collections.sort(a,Comparator.comparingDouble(SV::getdiem).reversed());    
+        int dem = 0, vt = 0;
+        for(int i = 0; i < a.size(); i++){
+            if(dem == m){
+                vt = i;
+                break;
+            }
+            if(a.get(i).getrank().compareTo("KHONG") != 0)
+                dem++;
+        }
+        double x = a.get(vt-1).getdiem();
+        for(int i = vt; i < a.size(); i++)
+            if(a.get(i).getdiem() < x)
+                a.get(i).setrank();
+        Collections.sort(a, Comparator.comparingInt(SV::getso));
+        for(SV s : a)
+            System.out.println(s.out());
+    }
+}
