@@ -1,0 +1,47 @@
+import java.util.*;
+
+
+public class Test{
+    static int Vitri(String s){
+        int vt = 0;
+        int ok = 0;
+        for(int i = 0; i < s.length(); i++)
+            if(s.charAt(i) != '0'){
+                vt = i;
+                ok = 1;
+                break;
+            }
+        if(ok == 1) return vt;
+        return s.length()-1;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while(1 > 0){
+            int n = sc.nextInt();
+            if(n == 0) break;
+            ArrayList<String> a = new ArrayList<>();
+            while(n-- > 0){
+                String s1 = sc.next();
+                s1 = s1.substring(Vitri(s1));
+                a.add(s1);
+            }
+            Collections.sort(a, new Comparator<String>() {
+                @Override
+                public int compare(String o1, String o2) {
+                    if(o1.length() != o2.length()) return o1.length() - o2.length();
+                    int vt = 0;
+                    for(int i = 0; i < o1.length(); i++)
+                        if(o1.charAt(i) != o2.charAt(i)){
+                            vt = i;
+                            break;
+                        }
+                    return o1.charAt(vt) - o2.charAt(vt);
+                }
+            });
+            if(a.get(0).compareTo(a.get(a.size()-1)) == 0) System.out.println("BANG NHAU");
+            else{
+                System.out.println(a.get(0) + " " + a.get(a.size()-1));
+            }
+        }
+    }
+}
