@@ -1,0 +1,23 @@
+import java.util.Scanner;
+
+public class Test {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = Integer.parseInt(sc.nextLine());
+        while(t-- > 0){
+            String s = sc.nextLine();
+            s = s.trim().toLowerCase();
+            s = s.replaceAll("\\s+", " ");
+            String a[] = s.split(" ");
+            for(int i = 1; i < a.length; i++){
+                String tmp = a[i];
+                if(a[i].isEmpty() == false)
+                    a[i] = tmp.substring(0,1).toUpperCase() + tmp.substring(1, a[i].length());
+                System.out.print(a[i]);
+                if(i != a.length-1) System.out.print(" ");
+            }
+            a[0] = a[0].toUpperCase();
+            System.out.println(", " + a[0]);
+        }  
+    }
+}
