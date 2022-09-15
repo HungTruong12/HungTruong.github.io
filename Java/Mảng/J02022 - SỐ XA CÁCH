@@ -1,0 +1,39 @@
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class App {
+    public static int a[] = new int[11], n, check[] = new int[11];
+    public static int ktra(){
+        for(int i = 1; i < n; i++)
+            if(a[i] - a[i+1] == 1 || a[i] - a[i+1] == -1)
+                return 0;
+        return 1;
+    }
+    public static void Try(int i){
+        for(int j = 1; j <= n; j++)
+            if(check[j] == 1){
+                a[i] = j;
+                check[j] = 0;
+                if(i == n){
+                    if(ktra() == 1){
+                        for(int k = 1; k <= n; k++) 
+                            System.out.print(a[k]);
+                        System.out.println();
+                    }
+                        
+                } 
+                else Try(i+1);
+                check[j] = 1;
+            }
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        for(int x = 1; x <= t; x++){
+            n = sc.nextInt();
+            // for(int i = 1; i <= n; i++) a[i] = i;
+            Arrays.fill(check, 1);
+            Try(1);
+        }
+    }
+}
