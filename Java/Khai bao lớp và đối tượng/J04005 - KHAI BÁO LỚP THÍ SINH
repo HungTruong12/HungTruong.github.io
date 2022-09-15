@@ -1,0 +1,17 @@
+import java.util.Scanner;
+
+public class ThiSinh {
+    String ten, ns;
+    float diem1, diem2, diem3, tong;
+    public void out(){
+        System.out.println(ten + " " + ns + " " + tong);
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ThiSinh P = new ThiSinh();
+        P.ten = sc.nextLine(); P.ns = sc.nextLine();
+        P.diem1 = sc.nextFloat(); P.diem2 = sc.nextFloat(); P.diem3 = sc.nextFloat();
+        P.tong = P.diem1 + P.diem2 + P.diem3;
+        P.out();
+    }
+}
