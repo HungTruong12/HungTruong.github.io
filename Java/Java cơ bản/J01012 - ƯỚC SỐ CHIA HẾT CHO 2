@@ -1,0 +1,23 @@
+import java.util.Scanner;
+
+public class SD {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        for(int k = 1; k <= t; k++){
+            int n = sc.nextInt();
+            if(n % 2 != 0) System.out.println("0");
+            else{
+                int dem = 1;
+                for(int i = 2; i <= Math.sqrt(n); i++){
+                    if(n % i == 0){
+                        if(i % 2 == 0) dem++;
+                        if(n/i % 2 == 0) dem++;
+                    }
+                }
+                if((double) Math.sqrt(n) == (int) Math.sqrt(n)) dem--;
+                System.out.println(dem);
+            }
+        }
+    }
+}
