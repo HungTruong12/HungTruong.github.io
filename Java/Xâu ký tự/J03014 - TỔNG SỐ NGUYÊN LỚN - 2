@@ -1,0 +1,41 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class tempCodeRunnerFile {
+    
+    public static void tong(char a[], char b[]){
+        String s = "";
+        int nho = 0;
+        for(int i = a.length-1; i >= 0; i--){
+            int so = (a[i] - '0') + (b[i] - '0') + nho;
+            if(so >= 10){
+                nho = 1;
+                s = (char) (so - 10 + '0') + s;
+            }
+            else{
+                nho = 0;
+                s = (char) (so + '0') + s;
+            }
+        }
+        if(nho > 0) s = '1' + s;
+        int vt = 0;
+        for(int i = 0; i < s.length(); i++)
+            if(s.charAt(i) != '0'){
+                vt = i;
+                break;
+            }
+        for(int i = vt; i < s.length(); i++)
+        System.out.print(s.charAt(i));
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s1 = sc.nextLine(), s2 = sc.nextLine();
+        while(s1.length() < s2.length())
+            s1 = '0' + s1;
+        while(s1.length() > s2.length())
+            s2 = '0' + s2;
+        char a[] = s1.toCharArray();
+        char b[] = s2.toCharArray();
+        tong(a, b);
+    }
+}
