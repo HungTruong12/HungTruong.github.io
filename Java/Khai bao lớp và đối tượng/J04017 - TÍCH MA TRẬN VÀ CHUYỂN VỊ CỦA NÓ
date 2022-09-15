@@ -1,0 +1,52 @@
+package javaapplication1;
+import java.util.*;
+
+class Matrix{
+    public int n, m, a[][] = new int [100][100], D[][] = new int [100][100];
+    public Matrix(int n, int m){
+        this.n = n;
+        this.m = m;
+    }
+    public void nextMatrix(Scanner sc){
+        for(int i = 0; i < n; i++)
+            for(int j = 0; j < m; j++)
+                a[i][j] = sc.nextInt();         
+    }
+    public Matrix trans(){
+        Matrix c = new Matrix(n, m);
+        for(int i = 0; i < m; i++)
+            for(int j = 0; j < n; j++)
+                c.D[i][j] = a[j][i];
+        return c;
+    }
+    public String mul(Matrix b){
+        int c[][] = new int[n][n];
+        for(int i = 0; i < n; i++)
+            for(int j = 0; j < n; j++){
+                c[i][j] = 0;
+                for(int k = 0; k < m; k++)
+                    c[i][j] += a[i][k] * b.D[k][j];
+            }
+        String s = "";
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < n; j++)
+                s = s + String.format("%d ", c[i][j]);
+            s += "\n";
+        }
+        return s;
+    }
+}
+public class Test {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while(t-->0){
+             int n = sc.nextInt(), m = sc.nextInt();
+             Matrix a = new Matrix(n,m);
+             a.nextMatrix(sc);
+             Matrix b = a.trans();
+             System.out.println(a.mul(b));
+        }
+    }
+}
+
