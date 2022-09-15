@@ -1,0 +1,28 @@
+import java.util.Scanner;
+
+public class Test {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = 1;
+        while(t > 0){
+            final long p = 1000000007;
+            long a = sc.nextLong(), b = sc.nextLong();
+            if(a == 0 && b == 0) break;
+            if(b == 0) System.out.println("1");
+            else{
+                long res = 1;
+                while(b > 0){
+                    if(b % 2 == 1){
+                        res *= a;
+                        res %= p;
+                    }
+                    a *= a;
+                    a %= p;
+                    b /= 2;
+                }
+                System.out.println(res);
+            }
+        }  
+    }
+    
+}
