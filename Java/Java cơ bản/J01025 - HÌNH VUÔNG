@@ -1,0 +1,20 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Triangle {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int maxx = -1, minx = 1001, maxy = -1, miny = 1001;
+        for(int i = 0; i < 4; i++){
+            int x = sc.nextInt();
+            maxx = Math.max(maxx, x);
+            minx = Math.min(minx, x);
+            int y = sc.nextInt();
+            maxy = Math.max(maxy, y);
+            miny = Math.min(miny, y);
+        }
+        maxx = maxx - minx;
+        maxy = maxy - miny;
+        System.out.println(Math.max(maxx, maxy) * Math.max(maxx, maxy));
+    }
+}
