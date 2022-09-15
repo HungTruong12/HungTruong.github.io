@@ -1,0 +1,16 @@
+import java.util.Scanner;
+
+public class Point {
+    private long x, y;
+    public static long ucln(long a, long b){
+        if(b == 0) return a;
+        return ucln(b, a%b);
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Point P = new Point();
+        P.x = sc.nextLong(); P.y = sc.nextLong();
+        long a = ucln(P.x,P.y);
+        System.out.println(P.x/a + "/" + P.y/a);
+    }
+}
