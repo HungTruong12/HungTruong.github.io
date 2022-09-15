@@ -1,0 +1,25 @@
+import java.util.Scanner;
+
+public class App {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt(), sum = 0;
+        for(int k = 1; k <= t; k++){
+            int n = sc.nextInt();
+            while(n % 2 == 0){
+                sum += 2;
+                n /= 2;
+            }
+            for(int i = 3; i <= Math.sqrt(n); i += 2){
+                while(n % i == 0){
+                    sum += i;
+                    n /= i;
+                }
+                if(n == 1) break;
+            }
+                
+            if(n > 1) sum += n;
+        }
+        System.out.println(sum);
+    }
+}
