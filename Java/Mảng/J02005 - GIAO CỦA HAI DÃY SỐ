@@ -1,0 +1,19 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.*;
+
+public class Test {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt(), m = sc.nextInt();
+        TreeSet<Integer> s1 = new TreeSet<>();
+        TreeSet<Integer> s2 = new TreeSet<>();
+        while(n-- > 0)
+            s1.add(sc.nextInt());
+        while(m-- > 0)
+            s2.add(sc.nextInt());
+        s1.retainAll(s2);
+        for(int x : s1)
+            System.out.print(x + " ");
+    }
+}
