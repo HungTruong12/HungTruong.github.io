@@ -1,0 +1,25 @@
+import java.util.Scanner;
+
+public class App {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while(t > 0){
+            int n = sc.nextInt();
+            int check = 0;
+            if(n < 2){
+                System.out.println("NO\n");
+                t--;
+                continue;
+            }
+            for(int i = 2; i <= Math.sqrt(n); i++)
+                if(n % i == 0){
+                    System.out.println("NO\n");
+                    check = 1;
+                    break;
+                }
+            if(check == 0) System.out.println("YES\n");
+            t--;
+        }
+    }
+}
