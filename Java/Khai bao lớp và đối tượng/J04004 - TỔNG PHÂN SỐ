@@ -1,0 +1,19 @@
+import java.util.Scanner;
+
+public class Point {
+    long x, y;
+    public static long ucln(long a, long b){
+        if(b == 0) return a;
+        return ucln(b, a%b);
+    } 
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Point P = new Point(), Q = new Point(), T = new Point();
+        P.x = sc.nextInt(); P.y = sc.nextInt();
+        Q.x = sc.nextInt(); Q.y = sc.nextInt();
+        P.x = P.x * Q.y + Q.x * P.y;
+        P.y = P.y * Q.y;
+        long a = ucln(P.x, P.y);
+        System.out.println(P.x/a + "/" + P.y/a);
+    }
+}
