@@ -1,0 +1,15 @@
+import java.util.Scanner;
+
+public class App {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        for(int k = 1; k <= t; k++){
+            int n = sc.nextInt(), h = sc.nextInt();
+            for(int i = 1; i < n; i++){
+                System.out.printf("%.6f ", h*Math.sqrt((double) i/n));
+            }
+             System.out.println("\n");
+        }
+    }
+}
