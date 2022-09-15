@@ -1,0 +1,23 @@
+import java.util.Scanner;
+
+public class Point {
+    double x, y;
+    public Point(double z, double t){
+        x = z;
+        y = t;
+    }
+    public static double distance(Point P, Point Q){
+        return (double) Math.sqrt((double) Math.pow(P.x - Q.x, 2) + Math.pow(P.y - Q.y, 2));
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while(t > 0){
+            double a = sc.nextDouble(), b = sc.nextDouble();
+            double c = sc.nextDouble(), d = sc.nextDouble();
+            Point P = new Point(a, b), Q = new Point(c,d);
+            System.out.printf("%.4f\n", distance(P,Q));
+            t--;
+        }    
+    }
+}
