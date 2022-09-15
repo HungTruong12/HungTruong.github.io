@@ -1,0 +1,23 @@
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class App {
+    public static int ktra(int n){
+        while(n > 0){
+            int a = n % 10;
+            if(a != 0 && a != 1 && a != 2)
+                return 0;
+            n /= 10;
+        }
+        return 1;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        for(int x = 1; x <= t; x++){
+            int n = sc.nextInt();
+            if(ktra(n) == 1) System.out.println("YES");
+            else System.out.println("NO");
+        }
+    }
+}
