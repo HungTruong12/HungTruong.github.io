@@ -1,0 +1,31 @@
+import java.util.Scanner;
+
+public class Point
+{
+    String ma, ten;
+    double a,b,c;
+    public void out(){
+        System.out.print(ma + " " + ten + " ");
+        double x = 0.5;
+        if(ma.charAt(2) == '2') x = 1.0;
+        else if(ma.charAt(2) == '3') x = 2.5;
+        if(x == (int) x) System.out.print((int) x + " ");
+        else System.out.print(x + " ");
+        double z = a*2 + b + c;
+        if(z == (int) z)    System.out.print((int) z);
+        else System.out.print(z);
+        System.out.print(" ");
+        if(a*2+b+c+x >= 24) System.out.println("TRUNG TUYEN");
+        else System.out.println("TRUOT");
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Point P = new Point();
+        P.ma = sc.nextLine();
+        P.ten = sc.nextLine();
+        P.a = sc.nextDouble();
+        P.b = sc.nextDouble();
+        P.c = sc.nextDouble();
+        P.out();
+    }
+}
