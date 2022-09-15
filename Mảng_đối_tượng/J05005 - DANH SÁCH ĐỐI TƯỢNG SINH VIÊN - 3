@@ -1,0 +1,61 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.Collections;
+import java.util.Comparator;
+
+class SV{
+    private String ma, ten,lop, ns;
+    private float gpa;
+    public SV(int i,String ten, String lop, String ns, float gpa){
+        if(i < 10) this.ma = "B20DCCN00" + (char)(i + '0');
+        else this.ma = "B20DCCN0" + Integer.toString(i);
+        this.ten = ten;
+        this.lop = lop;
+        this.ns = ns;
+        this.gpa = gpa;
+    }
+    public String ChuanHoa(String s){
+        s = s.trim().replaceAll("\\s++", " ");
+        String a[] = s.split(" ");
+        String tmp = "";
+        for(String w : a){
+            tmp = tmp + w.substring(0, 1).toUpperCase() + w.substring(1, w.length()).toLowerCase();
+            tmp = tmp + ' ';
+        }
+        return tmp;
+    }
+    public float getgpa(){
+        return gpa;
+    }
+    public void out(){
+        ten = ChuanHoa(ten);
+        System.out.print(ma + " " + ten + " " + lop + " ");
+        if(ns.charAt(2) != '/') ns = '0' + ns;
+        for(int i = 0; i < ns.length(); i++){
+            if(ns.charAt(5) != '/' && i == 3)
+                System.out.print(0);
+            System.out.print(ns.charAt(i));
+        }
+        System.out.printf(" %.2f\n", gpa);
+    }
+}
+public class Triangle {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ArrayList<SV> a = new ArrayList<>();
+        int n = sc.nextInt();
+        for(int i = 1; i <= n; i++){
+            sc.nextLine();
+            a.add(new SV(i,sc.nextLine(), sc.next(), sc.next(),sc.nextFloat()));
+        }
+        Collections.sort(a, new Comparator<SV>() {
+            @Override
+            public int compare(SV a, SV b){
+                int gpaCompare = Float.compare(b.getgpa(), a.getgpa());
+                return gpaCompare;
+            }
+        });
+        for(SV x : a)
+            x.out();
+    }
+}
