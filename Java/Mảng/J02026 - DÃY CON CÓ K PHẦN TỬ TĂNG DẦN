@@ -1,0 +1,41 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Scanner;
+import java.util.Collections;
+
+public class Test {
+    public static int a[] = new int[20], b[] = new int[20], n, k;
+    static void out(){
+        for(int i = 1; i <= k; i++)
+            System.out.print(b[a[i]]+ " ");
+        System.out.println();
+    }
+    static void Try(int i){
+        for(int j = a[i-1]+1; j <= n-k+i; j++){
+            a[i] = j;
+            if(i == k)
+                out();    
+            else Try(i+1);
+        }
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while(t-- > 0){
+            Arrays.fill(a, 0);
+            n = sc.nextInt();
+            k = sc.nextInt();
+            for(int i = 1; i <= n; i++)
+                b[i] = sc.nextInt();
+            for(int i = 1; i < n; i++)
+                for(int j = i+1; j <= n; j++)
+                    if(b[i] > b[j]){
+                        int tmp = b[i];
+                        b[i] = b[j];
+                        b[j] = tmp;
+                    }
+            Try(1);
+        }
+    }
+}
