@@ -1,0 +1,35 @@
+import java.util.Scanner;
+
+public class Point {
+    private long x, y;
+    public static long ucln(long a, long b){
+        if(b == 0) return a;
+        return ucln(b, a%b);
+    } 
+    public static Point rutgon(Point T){
+        long a = ucln(T.x, T.y);
+        T.x = T.x / a;
+        T.y = T.y / a;
+        return T;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while(t > 0){
+            Point P = new Point(), Q = new Point(), T = new Point();
+            P.x = sc.nextInt(); P.y = sc.nextInt();
+            Q.x = sc.nextInt(); Q.y = sc.nextInt();
+            T.x = P.x * Q.y + Q.x * P.y;
+            T.y = P.y * Q.y;
+            T.x = T.x * T.x;
+            T.y = T.y * T.y;
+            T = rutgon(T);
+            System.out.print(T.x + "/" + T.y + " ");
+            T.x = P.x * Q.x * T.x;
+            T.y = P.y * Q.y * T.y;
+            T = rutgon(T);
+            System.out.println(T.x + "/" + T.y);
+            t--;
+        }
+    }
+}
