@@ -1,0 +1,29 @@
+import java.util.Scanner;
+
+public class HCN
+{
+    int width, height;
+    String s;
+    public HCN(int a, int b, String c){
+        width = a;
+        height = b;
+        s = c;
+    }
+    public void out(){
+        if(width <= 0 || height <= 0) System.out.println("INVALID");
+        else{
+            System.out.print(2 * (width + height) + " " + width * height + " ");
+            s = s.toLowerCase();
+            System.out.print((char) (s.charAt(1) - 32));
+            for(int i = 2; i < s.length(); i++)
+                System.out.print(s.charAt(i));
+        }  
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int a = sc.nextInt(); int b = sc. nextInt();
+        String c = sc.nextLine();
+        HCN p = new HCN(a, b, c);
+        p.out();
+    }
+}
