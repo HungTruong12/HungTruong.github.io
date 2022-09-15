@@ -1,0 +1,28 @@
+import java.util.Scanner;
+
+public class App {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        for(int k = 1; k <= t; k++){
+            int n = sc.nextInt();
+            int sum = 0, a[] = new int[n];
+            for(int i = 0; i < n; i++){
+                a[i] = sc.nextInt();
+                sum += a[i];
+            }
+            int check = 0, sumleft = a[0];
+            sum -= a[0];
+            for(int i = 1; i < n-1; i++){
+                sum -= a[i];
+                if(sumleft == sum){
+                    System.out.println(i+1 + "\n");
+                    check = 1;
+                    break;
+                }
+                else sumleft += a[i];
+            }
+            if(check == 0) System.out.println("-1\n");
+        }
+    }
+}
