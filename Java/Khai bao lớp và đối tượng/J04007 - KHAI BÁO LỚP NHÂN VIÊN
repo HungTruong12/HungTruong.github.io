@@ -1,0 +1,22 @@
+import java.util.Scanner;
+
+public class ThiSinh {
+    String mnv = "00001";
+    String ten, gt, ns, dc, mst, ngay;
+    public void out(){
+        System.out.print(mnv + " " + ten + " " + gt + " " + ns + " " + dc + " " + mst + " " + ngay);
+      
+        // System.out.printf(" %.2f", gpa);
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ThiSinh P = new ThiSinh();
+        P.ten = sc.nextLine();
+        P.gt = sc.nextLine();
+        P.ns = sc.nextLine();
+        P.dc = sc.nextLine();
+        P.mst = sc.nextLine();
+        P.ngay = sc.nextLine();
+        P.out();
+    }
+}
