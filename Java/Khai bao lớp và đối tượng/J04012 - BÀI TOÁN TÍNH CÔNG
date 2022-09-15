@@ -1,0 +1,31 @@
+import java.util.Scanner;
+
+public class Point
+{
+    String ma = "NV01", ten, chuc;
+    int luong, ngay, cong, phu, thuong;
+    public void out(){
+        System.out.print(ma + " " + ten + " ");
+        if(chuc.charAt(0) == 'G')
+            phu = 250000;
+        else if(chuc.charAt(0) == 'P')
+            phu = 200000;
+        else if(chuc.charAt(0) == 'T')
+            phu = 180000;
+        else phu = 150000;
+        System.out.print(luong * ngay + " ");
+        if(ngay >= 25) thuong =  luong * ngay * 20 / 100;
+        else if(ngay >= 22) thuong = luong * ngay * 10 / 100;
+        else thuong = 0;
+        System.out.print(thuong + " " + phu + " " + (luong * ngay + thuong + phu));
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Point P = new Point();
+        P.ten = sc.nextLine();
+        P.luong = sc.nextInt();
+        P.ngay = sc.nextInt();
+        P.chuc = sc.next();
+        P.out();
+    }
+}
