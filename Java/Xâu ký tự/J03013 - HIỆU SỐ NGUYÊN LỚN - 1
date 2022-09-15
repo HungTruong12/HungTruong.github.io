@@ -1,0 +1,42 @@
+import java.util.Scanner;
+
+public class Hieu{
+    public static void hieu(char a[], char b[]){
+        int nho = 0;
+        String s = "";
+        for(int i = a.length-1; i >= 0; i--){
+            int so = (a[i] - '0') - (b[i] - '0') - nho;
+            if(so < 0){
+                nho = 1;
+                s = (char) (so + 10 + '0') + s;
+            }
+            else{
+                s = (char) (so + '0') + s;
+                nho = 0;
+            } 
+        }
+        System.out.println(s);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while(t > 0){
+            String s1 = sc.next();
+            String s2 = sc.next();
+            while(s1.length() < s2.length())
+                s1 = '0' + s1;
+            while(s1.length() > s2.length())
+                s2 = '0' + s2;
+            if(s1.compareTo(s2) < 0){
+                String tmp = s1;
+                s1 = s2;
+                s2 = tmp;
+            }
+            char a[] = s1.toCharArray();
+            char b[] = s2.toCharArray();
+            hieu(a, b);
+            t--;
+        }
+    } 
+}
