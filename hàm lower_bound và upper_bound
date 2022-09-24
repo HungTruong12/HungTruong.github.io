@@ -1,0 +1,31 @@
+public static long lower_bound(long []a, int l, int r, long x){
+ 
+        long ans = r + 1;
+        while(l <= r){
+            int m = (l + r) / 2;
+            if(a[m] == x){
+                ans = m;
+                r = m - 1;
+            }
+            else if(a[m] >= x){
+                r = m - 1;
+            } else l = m + 1;
+        }
+        return ans;
+    }
+    public static long upper_bound(long []a, int l, int r, long x){
+ 
+        long ans = r + 1;
+        while(l <= r){
+            int m = (l + r) / 2;
+            if(a[m] == x){
+                ans = m;
+                l = m + 1;
+ 
+            }
+            else if(a[m] >= x){
+                r = m - 1;
+            } else l = m + 1;
+        }
+        return ans;
+    }
