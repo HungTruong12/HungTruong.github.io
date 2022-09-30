@@ -1,0 +1,74 @@
+package javaapplication1;
+import java.util.*;
+
+class Room{
+    public String ma, ten;
+    public Room(String a){
+        this.ma = a.substring(0,2);
+        this.ten = a.substring(3);
+    }
+}
+class NV{
+    private String ma, ten, phong;
+    private long luong;
+    public NV(String ma, String ten, int a, int b){
+        this.ma = ma;
+        this.ten = ten;
+        this.luong = a * b * heso(ma) * 1000;
+    }
+    public String getma(){
+        return ma;
+    }
+    public int heso(String a){
+        int x = Integer.parseInt(a.substring(1,3));
+        char c = a.charAt(0);
+        if(c == 'A'){
+            if(x <= 3) return 10;
+            else if(x <= 8) return 12;
+            else if(x <= 15) return 14;
+            else return 20;
+        }
+        else if(c == 'B'){
+            if(x <= 3) return 10;
+            else if(x <= 8) return 11;
+            else if(x <= 15) return 13;
+            else return 16;
+        }
+        else if(c == 'C'){
+            if(x <= 3) return 9;
+            else if(x <= 8) return 10;
+            else if(x <= 15) return 12;
+            else return 14;
+        }
+        if(x <= 3) return 8;
+        else if(x <= 8) return 9;
+        else if(x <= 15) return 11;
+        return 13;    
+    }
+    public String out(){
+        return ma + " " + ten + " " + luong;
+    }
+}
+public class Test {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = Integer.parseInt(sc.nextLine());
+        ArrayList<Room> a = new ArrayList<>();
+        ArrayList<NV> b = new ArrayList<>();
+        while(n-- > 0)
+            a.add(new Room(sc.nextLine()));
+        int m = Integer.parseInt(sc.nextLine());
+        while(m-- > 0)
+            b.add(new NV(sc.nextLine(), sc.nextLine(), Integer.parseInt(sc.nextLine()), Integer.parseInt(sc.nextLine())));
+        String s = sc.next(), s1 = "";
+        for(int i = 0; i < a.size(); i++)
+            if(s.equals(a.get(i).ma)){
+                s1 = a.get(i).ten;
+                break;
+            }
+        System.out.println("Bang luong phong " + s1 + ":");
+        for(NV x : b)
+            if(x.getma().substring(3).equals(s))
+                System.out.println(x.out());
+    }
+}
