@@ -1,0 +1,44 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Scanner;
+
+class SV
+{
+    private String ma, ten;
+    private double a,b,c;
+    public SV(String ma, String x, String ten, double a, double b, double c){
+        this.ma = ma;
+        this.ten = ten;
+        this.a = a;
+        this.b = b;
+        this.c = c;
+    }
+    public void out(){
+        System.out.print(ma + " " + ten + " ");
+        double x = 0.5;
+        if(ma.charAt(2) == '2') x = 1.0;
+        else if(ma.charAt(2) == '3') x = 2.5;
+        if(x == (int) x) System.out.print((int) x + " ");
+        else System.out.print(x + " ");
+        double z = a*2 + b + c;
+        if(z == (int) z)    System.out.print((int) z);
+        else System.out.print(z);
+        System.out.print(" ");
+        if(a*2+b+c+x >= 24) System.out.println("TRUNG TUYEN");
+        else System.out.println("TRUOT");
+    }
+}
+public class Test{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc. nextInt();
+        ArrayList<SV> a = new ArrayList<>();
+        for(int i = 1; i <= n; i++)
+            a.add(new SV(sc.next(), sc.nextLine(), sc.nextLine(), sc.nextDouble(), sc.nextDouble(), sc.nextDouble()));
+        
+        for(SV x : a)
+            x.out();
+    }
+}
