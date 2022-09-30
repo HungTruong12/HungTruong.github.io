@@ -1,0 +1,30 @@
+import java.util.Scanner;
+
+public class Point {
+    private long x, y;
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while(t > 0){
+            Point P = new Point(), Q = new Point(), T = new Point();
+            P.x = sc.nextLong(); P.y = sc.nextLong();
+            Q.x = sc.nextLong(); Q.y = sc.nextLong();
+            T.x = P.x * P.x - P.y * P.y + P.x * Q.x - P.y * Q.y;
+            T.y = 2*P.x*P.y + P.x * Q.y + P.y * Q.x;
+            // if(T.x != 0)
+                System.out.print(T.x);
+            if(T.y >= 0)
+                System.out.print(" + " + T.y + "i, ");
+            else if(T.y < 0) System.out.print(" - " + (-T.y) + "i, ");
+            T.x = (P.x + Q.x) * (P.x + Q.x) - (Q.y + P.y) * (Q.y + P.y);
+            T.y = 2*(P.x + Q.x)*(Q.y + P.y);
+            // if(T.x != 0)
+                System.out.print(T.x);
+            if(T.y >= 0)
+                System.out.print(" + " + T.y + "i");
+            else if(T.y < 0) System.out.print(" - " + (-T.y) + "i");
+            System.out.println();
+            t--;
+        }
+    }
+}
