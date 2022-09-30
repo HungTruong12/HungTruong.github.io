@@ -1,0 +1,47 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Scanner;
+
+class GV{
+    private String ma, ten;
+    private long bac, luong, phu;
+    public GV(String ma, String x, String ten, long a){
+        this.ma = ma;
+        this.ten = ten;
+        this.bac = (ma.charAt(ma.length()-2) - '0') * 10 + (ma.charAt(ma.length()-1) - '0');
+        if(ma.charAt(1) == 'T') phu = 2000000;
+        else if(ma.charAt(1) == 'P') phu = 900000;
+        else phu = 500000;
+        this.luong = bac * a + phu;
+    }
+    public String getma(){
+        return ma;
+    }
+    public String out(){
+        return ma + " " + ten + " " + bac + " " + phu + " " + luong;
+    }
+}
+public class Point{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int D[] = new int[100];
+        Arrays.fill(D, 0);
+        int n = sc.nextInt();
+        ArrayList<GV> a = new ArrayList<>();
+        for(int i = 1; i <= n; i++){
+            GV x = new GV(sc.next(), sc.nextLine(), sc.nextLine(), sc.nextLong());
+            char c = x.getma().charAt(1);
+            if(c == 'T' && D[c] == 0)
+                a.add(x);
+            else if(c == 'P' && D[c] < 2)
+                a.add(x);
+            if(c == 'V') a.add(x);
+            D[c]++;
+        }
+        for(GV x : a)
+            System.out.println(x.out());
+    }
+}
