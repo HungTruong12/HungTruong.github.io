@@ -1,0 +1,50 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Scanner;
+
+class SV{
+    private String ma, name;
+    private int sv;
+    public SV(String ma, String a, String ten, int sv){
+        this.ma = ma;
+        this.name = ten;
+        this.sv = sv;
+    }
+    public int getsv(){
+        return sv;
+    }
+    public String getma(){
+        return ma;
+    }
+    public String out(){
+        return ma + " " + name + " " + sv;
+    }
+}
+
+public class Test1 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ArrayList<SV> a = new ArrayList<>();
+        sc.nextLine();
+        for(int i = 1; i <= n; i++)
+            a.add(new SV(sc.next(), sc.nextLine(), sc.nextLine(), sc.nextInt()));
+        Collections.sort(a, new Comparator<SV>() {
+            @Override
+            public int compare(SV a, SV b){
+                if(a.getsv() != b.getsv()) return b.getsv() - a.getsv();
+                return a.getma().compareTo(b.getma());
+            }
+        });
+        int q = sc.nextInt();
+        while(q-- > 0){
+            int z = sc.nextInt(), t = sc.nextInt();
+            System.out.println("DANH SACH DOANH NGHIEP NHAN TU " + z + " DEN " + t + " SINH VIEN:");
+            for(SV x : a)
+                if(x.getsv() >= z && x.getsv() <= t)
+                    System.out.println(x.out());
+        }          
+    }
+}
