@@ -1,0 +1,121 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Scanner;
+
+
+class VDV{
+    private String ten, ma, res, s1, s2;
+    private int rank;
+    class Time{
+        private int gio, phut, giay;
+    }
+    public VDV(int i, String ten, String ns, String start, String end){
+        if(i < 10) this.ma = "VDV0" + i;
+        else this.ma = "VDV" + i;
+        this.ten = ten;
+        int m = 2021 - nam(ns);
+        if(m < 18){
+            this.s1 = "00:00:00";
+        }
+        else if(m < 25){
+            this.s1 = "00:00:01";
+        }
+        else if(m < 32){
+            this.s1 = "00:00:02";
+        }
+        else{
+            this.s1 = "00:00:03";
+        }
+        this.res = solve(start, end);
+        this.s2 = solve(s1, res);
+    }
+    public String out(){
+        return ma + " " + ten + " " + res + " " + s1 + " " + s2 + " " + rank;
+    }
+    public String solve(String start, String end){
+        Time a = new Time();
+        char D[] = start.toCharArray();
+        char F[] = end.toCharArray();
+        int x = (D[0] - '0') * 10 + D[1] - '0', y = (D[3] - '0') * 10 + D[4] - '0', k = (D[6] - '0') * 10 + D[7] - '0';
+        int z = (F[0] - '0') * 10 + F[1] - '0', t = (F[3] - '0') * 10 + F[4] - '0', l = (F[6] - '0') * 10 + F[7] - '0';
+        if(l - k < 0){
+            a.giay = l - k + 60;
+            if(t - y - 1 < 0){
+                a.phut = t - y + 59;
+                a.gio = z - x - 1;
+            }
+            else{
+                a.phut = t - y - 1;
+                a.gio = z - x;
+            }
+        }
+        else{
+            a.giay = l - k;
+            if(t - y < 0){
+                a.phut = t - y + 60;
+                a.gio = z - x - 1;
+            }
+            else{
+                a.phut = t - y;
+                a.gio = z - x;
+            }
+        }
+        String s = Integer.toString(a.gio) + ':';
+        if(a.gio < 10) s = '0' + s;
+        if(a.phut < 10) s = s + '0' + String.valueOf(a.phut) + ':';
+        else s = s + Integer.toString(a.phut) + ':';
+        if(a.giay < 10) s = s + '0' + String.valueOf(a.giay);
+        else s = s + Integer.toString(a.giay);
+        return s;
+    }
+    public int nam(String s){
+        char a[] = s.toCharArray();
+        int x = 0;
+        for(int i = 6; i < a.length; i++)
+            x = x * 10 + (a[i] - '0');
+        return x;
+    }
+    public void setso(int a){
+        this.rank = a;
+    }
+    public int getso(){
+        return rank;
+    }
+    public String gets2(){
+        return s2;
+    }
+    public String getma(){
+        return ma;
+    }
+}
+public class Point{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ArrayList<VDV> a = new ArrayList<>();
+        for(int i = 1; i <= n; i++){
+            sc.nextLine();
+            a.add(new VDV(i, sc.nextLine(), sc.next(), sc.next(), sc.next()));
+        }
+        Collections.sort(a, new Comparator<VDV>() {
+            @Override
+            public int compare(VDV a, VDV b){
+                return a.gets2().compareTo(b.gets2());
+            }
+        });
+        for(int i = 0; i < a.size(); i++)
+            a.get(i).setso(i+1);
+        for(int i = 1; i < a.size(); i++)
+            if(a.get(i).gets2().compareTo(a.get(i-1).gets2()) == 0)
+                a.get(i).setso(a.get(i-1).getso());
+        // Collections.sort(a, new Comparator<VDV>() {
+        //     @Override
+        //     public int compare(VDV a, VDV b){
+        //         return a.getma().compareTo(b.getma());
+        //     }
+        // });
+        for(VDV x : a)
+            System.out.println(x.out());
+    }
+}
