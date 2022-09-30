@@ -1,0 +1,45 @@
+package javaapplication1;
+import java.util.*;
+
+class GV{
+    private String ma, ten, mon, res;
+    private double Tong;
+    public GV(int i, String ten, String s, double a, double b){
+        if(i < 10) this.ma = "GV0" + i;
+        else this.ma = "GV" + i;
+        this.ten = ten;
+        double x = 0.0;
+        if(s.charAt(0) == 'A') this.mon = "TOAN";
+        else if(s.charAt(0) == 'B') this.mon = "LY";
+        else this.mon = "HOA";
+        if(s.charAt(s.length()-1) == '1') x = 2.0;
+        else if(s.charAt(s.length()-1) == '2') x = 1.5;
+        else if(s.charAt(s.length()-1) == '3') x = 1.0;
+        this.Tong = (double) a * 2 + b + x;
+        if(Tong >= 18) this.res ="TRUNG TUYEN";
+        else this.res = "LOAI";
+    }
+    public double getTong(){
+        return Tong;
+    }
+    public String out(){
+        return ma + " " + ten + " " + mon + " " + String.format("%.1f ", Tong) + res;
+    }
+    public String getma(){
+        return ma;
+    }
+}
+public class Test {
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ArrayList<GV> a = new ArrayList<>();
+        for(int i = 1; i <= n; i++){
+            sc.nextLine();
+            a.add(new GV(i, sc.nextLine(), sc.next(), sc.nextDouble(), sc.nextDouble()));
+        }
+        Collections.sort(a, Comparator.comparingDouble(GV::getTong).reversed().thenComparing(GV::getma));
+        for(GV x : a)
+            System.out.println(x.out());
+    }
+}
