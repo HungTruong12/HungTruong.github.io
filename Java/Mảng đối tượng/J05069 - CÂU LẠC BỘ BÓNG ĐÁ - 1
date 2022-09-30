@@ -1,0 +1,45 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Scanner;
+
+
+class Club{
+    private String ma, name;
+    private long ticket, money;
+    public Club(String ma, String x, String ten, long a){
+        this.ma = ma;
+        this.name = ten;
+        this.ticket = a;
+    }
+    public void setmoney(long a){
+        this.money = a * ticket;
+    }
+    public String getma(){
+        return ma;
+    }
+    public String out(){
+        return name + " " + money;
+    }
+}
+public class Point{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ArrayList<Club> a = new ArrayList<>();
+        for(int i = 1; i <= n; i++)
+            a.add(new Club(sc.next(), sc.nextLine(), sc.nextLine(), sc.nextLong())); 
+        int q = sc.nextInt();
+        while(q-- > 0){
+            String s = sc.next();
+            System.out.print(s + " ");
+            s = s.substring(1,3);
+            long m = sc.nextLong();
+            for(Club x : a)
+                if(s.compareTo(x.getma()) == 0){
+                    x.setmoney(m);
+                    System.out.println(x.out());
+                }
+        }
+    }
+}
