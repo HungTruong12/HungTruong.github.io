@@ -1,0 +1,50 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Scanner;
+
+class SV{
+    private String ten, ns, ma;
+    private float a, b, c, tong;
+    public SV(int i, String ten, String ns, float a, float b, float c){
+        this.ma = Integer.toString(i);
+        this.ten = ten;
+        this.ns = ns;
+        this.a = a;
+        this.b = b;
+        this.c = c;
+        this.tong = a+b+c;
+    }
+    public float gettong(){
+        return tong;
+    }
+    public String out(){
+        return ma + " " + ten + " " + ns + " " + tong;
+    }
+}
+
+public class Test1 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ArrayList<SV> a = new ArrayList<>();
+        for(int i = 1; i <= n; i++){
+            sc.nextLine();
+            a.add(new SV(i, sc.nextLine(), sc.next(), sc.nextFloat(), sc.nextFloat(), sc.nextFloat()));
+        }
+        Collections.sort(a, new Comparator<SV>() {
+            @Override
+            public int compare(SV a, SV b){
+                int x = Float.compare(b.gettong(), a.gettong());
+                return x;
+            }
+        });
+        System.out.println(a.get(0).out());
+        for(int i = 1; i < n; i++){
+            if(a.get(i).gettong() == a.get(0).gettong())
+                System.out.println(a.get(i).out());
+            else break;
+        }
+    }
+}
