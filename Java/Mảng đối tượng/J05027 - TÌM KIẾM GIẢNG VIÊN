@@ -1,0 +1,43 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Scanner;
+
+class GV{
+    String ma, name, mon = "";
+    public GV(int i, String name, String s){
+        if(i < 10) this.ma = "GV0" + i;
+        else this.ma = "GV" + i;
+        this.name = name;
+        String a[] = s.toUpperCase().split(" ");
+        for(String w : a)
+            this.mon = this.mon + w.substring(0,1);
+    }
+    public String getten(){
+        return name;
+    }
+    public String out(){
+        return ma + " " + name + " " + mon;
+    }
+}
+
+public class Test {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ArrayList<GV> a = new ArrayList<>();
+        sc.nextLine();
+        for(int i = 1; i <= n; i++)
+            a.add(new GV(i, sc.nextLine(), sc.nextLine()));
+        int q = sc.nextInt();
+        while(q-- > 0){
+            String s = sc.next();
+            System.out.println("DANH SACH GIANG VIEN THEO TU KHOA " + s + ":");
+            s = s.toLowerCase();
+            for(GV x : a)
+                if(x.getten().toLowerCase().contains(s) == true)
+                    System.out.println(x.out());
+        }
+    }
+}
