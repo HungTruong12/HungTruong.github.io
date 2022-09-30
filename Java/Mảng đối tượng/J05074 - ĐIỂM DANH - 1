@@ -1,0 +1,55 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Scanner;
+
+class Diem{
+    private String ma, ten, lop, note;
+    private int diem;
+    public Diem(String ma, String x, String ten, String lop){
+        this.ma = ma;
+        this.ten = ten;
+        this.lop = lop;
+        this.note = "KDDK";
+    }
+    public String getma(){
+        return ma;
+    }
+    public void setso(int a){
+        this.diem = a;
+    }
+    public void setnote(){
+        this.note = "";
+    }
+    public String out(){
+        return ma + " " + ten + " " + lop + " " + diem + " " + note;
+    }
+}
+public class Point{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ArrayList<Diem> a = new ArrayList<>();
+        for(int i = 1; i <= n; i++)
+            a.add(new Diem(sc.next(), sc.nextLine(), sc.nextLine(), sc.next())); 
+        while(n-- > 0){
+            String s = sc.next(), s1 = sc.next();
+            int diem = 10;
+            for(int i = 0; i < s1.length(); i++){
+                if(s1.charAt(i) == 'm') diem -= 1;
+                else if(s1.charAt(i) == 'v') diem -= 2;
+            }
+            String x = "DKDK";
+            for(int i = 0; i < a.size(); i++)
+                if(a.get(i).getma().compareTo(s) == 0){
+                    if(diem > 0){
+                        a.get(i).setso(diem);
+                        a.get(i).setnote();
+                    }
+                    else a.get(i).setso(0);
+                }  
+        }
+        for(Diem x : a)
+                System.out.println(x.out());
+    }
+}
