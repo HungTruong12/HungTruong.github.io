@@ -1,0 +1,57 @@
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Scanner;
+
+class TS{
+    private String ma, ten, rank;
+    private long tuoi, tong;
+    public TS(int i, String ten, String ns, double a, double b){
+        if(i < 10) this.ma = "PH0" + i;
+        else this.ma = "PH" + i; 
+        this.ten = ten;
+        char s[] = ns.toCharArray();
+        this.tuoi = 2021 - ((s[6]-'0') * 1000 + (s[7]-'0') * 100 + (s[8]-'0') * 10 + (s[9]-'0'));
+        double x = 0;
+        if(a >= 8 && b >= 8) x = 1;
+        else if(a >= 7.5 && b >= 7.5) x = 0.5;
+        this.tong = Math.round((a+b) / 2 + x);
+        if(tong > 10) tong = 10;
+        if(tong == 9 || tong == 10) rank = "Xuat sac";
+        else if(tong == 8) rank = "Gioi";
+        else if(tong == 7) rank = "Kha";
+        else if(tong == 5 || tong == 6) rank = "Trung binh";
+        else rank = "Truot";
+    }
+    public String out(){
+        return ma + " " + ten + " " + tuoi + " " + tong + " " + rank;
+    }
+    public Long gettong(){
+        return tong;
+    }
+    public String getma(){
+        return ma;
+    }
+}
+public class Point{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ArrayList<TS> a = new ArrayList<>();
+        for(int i = 1; i <= n; i++){
+            sc.nextLine();
+            a.add(new TS(i, sc.nextLine(), sc.next(), sc.nextDouble(), sc.nextDouble()));
+        }
+        Collections.sort(a,new Comparator<TS>() {
+            @Override
+            public int compare(TS a, TS b){
+                if(a.gettong() != b.gettong())
+                    return Long.compare(b.gettong(), a.gettong());
+                return a.getma().compareTo(b.getma());
+            }
+        });
+        for(TS x : a)
+            System.out.println(x.out());
+    }
+}
