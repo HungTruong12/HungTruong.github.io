@@ -1,0 +1,48 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Scanner;
+
+class Kho{
+    private String ma, ten;
+    private int chiet, tien;
+    public Kho(String ma, String a, int x, int y){
+        this.ma = ma;
+        this.ten = a;
+        if(x > 10) this.chiet = x * y * 5 / 100;
+        else if(x >= 8) this.chiet = x * y * 2 / 100;
+        else if(x >= 5) this.chiet = x * y * 1 / 100;
+        else this.chiet = 0;
+        this.tien = x * y - chiet;
+    }
+    public String out(){
+        return ma + " " + ten + " " + chiet + " " + tien;
+    }
+}
+public class Point{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ArrayList<String> D = new ArrayList<>();
+        int n = sc.nextInt();
+        ArrayList<Kho> a = new ArrayList<>();
+        for(int i = 1; i <= n; i++){
+            sc.nextLine();
+            String ten = sc.nextLine();
+            String s[] = ten.split(" ");
+            String x = s[0].substring(0,1) + s[1].substring(0,1).toUpperCase();
+            int dem = 1;
+            for(String s1 : D)
+                if(x.compareTo(s1) == 0)
+                    dem++;
+            D.add(x);
+            x = x + "0" + dem;
+            int so = sc.nextInt(), b = sc.nextInt();
+            Kho p = new Kho(x, ten, so, b);
+            a.add(p);
+        }
+        for(Kho x : a)
+            System.out.println(x.out());
+    }
+}
