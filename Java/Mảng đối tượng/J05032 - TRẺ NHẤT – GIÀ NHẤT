@@ -1,0 +1,58 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.Collections;
+import java.util.Comparator;
+
+class old {
+    private String ten, ns;
+    private int x;
+    public int nam(String s){
+        char a[] = s.toCharArray();
+        int x = 0;
+        for(int i = 6; i < a.length; i++)
+            x = x * 10 + (a[i] - '0');
+        return x;
+    }
+    public int thang(String s){
+        char a[] = s.toCharArray();
+        int x = 0;
+        for(int i = 3; i < 5; i++)
+            x = x * 10 + (a[i] - '0');
+        return x;
+    }
+    public int ngay(String s){
+        char a[] = s.toCharArray();
+        int x = 0;
+        for(int i = 0; i < 2; i++)
+            x = x * 10 + (a[i] - '0');
+        return x;
+    }
+    public old(String ten, String ns){
+        this.ten = ten;
+        this.ns = ns;
+        char a[] = ns.toCharArray();
+        this.x = nam(ns) * 10000 + thang(ns) * 100 + ngay(ns);
+    }
+    public int getx(){
+        return x;
+    }
+    public String getten(){
+        return ten;
+    }
+}
+public class Test{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc. nextInt();
+        ArrayList <old> a = new ArrayList<>();
+        for(int i = 0; i < n; i++)
+            a.add(new old(sc.next(), sc.next()));
+        Collections.sort(a, new Comparator<old>() {
+            @Override
+            public int compare(old a, old b){
+                return b.getx() - a.getx();
+            }
+        });
+        System.out.println(a.get(0).getten() + "\n" + a.get(n-1).getten());
+    }
+}
