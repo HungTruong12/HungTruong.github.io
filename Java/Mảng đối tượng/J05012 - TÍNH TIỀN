@@ -1,0 +1,33 @@
+import java.util.*;
+
+class Pay{
+    private String ma, name;
+    private long number, price, discount, money;
+    public Pay(String ma, String x, String ten, Long a, Long b, Long c){
+        this.ma = ma;
+        this.name = ten;
+        this.number = a;
+        this.price = b;
+        this.discount = c;
+        this.money = a * b - c;
+    }
+    public long getmoney(){
+        return money;
+    }
+    @Override
+    public String toString(){
+        return ma + " " + name + " " + number + " " + price + " " + discount + " " + money;
+    }
+}
+public class Test {
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ArrayList<Pay> a = new ArrayList<>();
+        for(int i = 1; i <= n; i++)
+            a.add(new Pay(sc.next(), sc.nextLine(), sc.nextLine(), sc.nextLong(), sc.nextLong(), sc.nextLong()));   
+        Collections.sort(a, Comparator.comparingLong(Pay::getmoney).reversed());
+        for(Pay x : a)
+            System.out.println(x.toString());
+    }
+}
