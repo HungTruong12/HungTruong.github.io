@@ -1,0 +1,42 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Scanner;
+
+class MH{
+    private String ten, ma, so;
+    private long giam, tien;
+    public MH(String ten, String ma, long a, long b){
+        this.ten = ten;
+        this.ma = ma;
+        this.so = ma.substring(1,4);
+        if(ma.charAt(ma.length()-1) == '1') this.giam = a * b * 50 / 100;
+        else this.giam = a * b * 30 / 100;
+        this.tien = a * b - giam;
+    }
+    public String out(){
+        return ten + " " + ma + " " + so + " " + giam + " " + tien;
+    }
+    public String getso(){
+        return so;
+    }
+}
+public class Point{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ArrayList<MH> a = new ArrayList<>();
+        for(int i = 1; i <= n; i++){
+            sc.nextLine();
+            a.add(new MH(sc.nextLine(), sc.next(), sc.nextLong(), sc.nextLong()));
+        }
+        Collections.sort(a, new Comparator<MH>() {
+            @Override
+            public int compare(MH a, MH b){
+                return a.getso().compareTo(b.getso());
+            }
+        });
+        for(MH x : a)
+            System.out.println(x.out());
+    }
+}
