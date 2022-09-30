@@ -1,0 +1,20 @@
+import java.io.IOException;
+import java.math.BigInteger;
+import java.util.*;
+import java.io.File;
+
+public class Test {
+    public static void main(String[] args) throws IOException{
+        Scanner sc = new Scanner(new File("DATA.in"));
+        String s = sc.nextLine();
+        while(1 > 0){
+            int a = s.length() / 2;
+            BigInteger n = new BigInteger(s.substring(0, a));
+            BigInteger m = new BigInteger(s.substring(a));
+            BigInteger c = n.add(m);
+            System.out.println(c);
+            s = c.toString();
+            if(s.length() == 1) break;
+        }
+    }
+}
