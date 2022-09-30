@@ -1,0 +1,50 @@
+import java.io.IOException;
+import java.util.*;
+import java.io.File;
+
+class Point{
+    public double x, y;
+    static Point nextPoint(Scanner sc){
+        Point a = new Point();
+        a.x = sc.nextDouble();
+        a.y = sc.nextDouble();
+        return a;
+    }
+}
+class Triangle{
+    private Point a, b, c;
+    private double x, y, z;
+    public Triangle(Point a, Point b, Point c){
+        this.a = a;
+        this.b = b;
+        this.c = c;
+        this.x = distance(a, b);
+        this.y = distance(a, c);
+        this.z = distance(b, c);
+    }
+    public boolean valid(){
+        if(x + y <= z || x + z <= y || y + z <= x)
+            return false;
+        return true;
+    }
+    public static double distance(Point P, Point Q){
+        return (double) Math.sqrt((double) Math.pow(P.x - Q.x, 2) + Math.pow(P.y - Q.y, 2));
+    }
+    public String getPerimeter(){
+        return String.format("%.3f", x+y+z);
+    }
+}
+public class Test {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while(t-- >0){
+            Triangle a = new Triangle(Point.nextPoint(sc), Point.nextPoint(sc), Point.nextPoint(sc));
+            if(!a.valid()){
+                System.out.println("INVALID");
+            } else{
+                System.out.println(a.getPerimeter());
+            }
+        }
+    }
+}
