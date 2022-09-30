@@ -1,0 +1,48 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Scanner;
+
+class NV{
+    private String ma, ten, chuc;
+    private long phu, luong, ung, con;
+    public NV(int i, String ten, String chuc, Long a, Long b){
+        if(i < 10) this.ma = "NV0" + i;
+        else this.ma = "NV" + i;
+        this.ten = ten;
+        this.chuc = chuc;
+        if(chuc.charAt(0) == 'G') phu = 500;
+        else if(chuc.charAt(0) == 'P') phu = 400;
+        else if(chuc.charAt(0) == 'T') phu = 300;
+        else if(chuc.charAt(0) == 'K') phu = 250;
+        else phu = 100;
+        this.luong = a * b;
+        long x = Math.round((luong + phu) * 2.0 / 3 / 1000) * 1000;
+        if(x < 25000) this.ung = x;
+        else ung = 25000;
+        this.con = luong + phu - ung;
+    }
+    public String out(){
+        return ma + " " + ten + " " + phu + " " + luong + " " + ung + " " + con;
+    }
+    public String getchuc(){
+        return chuc;
+    }
+}
+
+public class Test {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ArrayList<NV> a = new ArrayList<>();
+        for(int i = 1; i <= n; i++){
+            sc.nextLine();
+            a.add(new NV(i, sc.nextLine(), sc.next(), sc.nextLong(), sc.nextLong()));
+        }
+            String s = sc.next();
+            for(NV x : a)
+                if(x.getchuc().equals(s) == true)
+                    System.out.println(x.out());
+    }
+}
