@@ -1,0 +1,39 @@
+import java.util.*;
+
+class TS{
+    private String ma, ten, loai;
+    private double TB;
+    public TS(int i, String ten, Double a, Double b){
+        if(i < 10) this.ma = "TS0" + i;
+        else this.ma = "TS" + i;
+        this.ten = ten;
+        double x = a, y = b;
+        if(a > 10) x = (double) a/10;
+        if(b > 10) y = (double) b/10;
+        this.TB = (double) (x+y) / 2;
+        if(TB < 5) this.loai = "TRUOT";
+        else if(TB < 8) this.loai = "CAN NHAC";
+        else if(TB <=9.5) this.loai = " DAT";
+        else this.loai = "XUAT SAC";
+    }
+    public double getTB(){
+        return TB;
+    }
+    public String out(){
+        return ma + " " + ten + " " + String.format("%.2f ", TB) + loai;
+    } 
+}
+public class Test {
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ArrayList<TS> a = new ArrayList<>();
+        for(int i = 1; i <= n; i++){
+            sc.nextLine();
+            a.add(new TS(i, sc.nextLine(), sc.nextDouble(), sc.nextDouble()));
+        }
+        Collections.sort(a, Comparator.comparingDouble(TS::getTB).reversed());
+        for(TS x : a)
+            System.out.println(x.out());
+    }
+}
