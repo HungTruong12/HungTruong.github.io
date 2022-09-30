@@ -1,0 +1,56 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Scanner;
+
+class Time{
+    private String ma, ten, start, end;
+    private int gio, phut;
+    public Time(String ma, String a, String ten, String start, String end){
+        this.ma = ma;
+        this.ten = ten;
+        this.start = start;
+        this.end = end;
+        char D[] = start.toCharArray();
+        char F[] = end.toCharArray();
+        int x = (D[0] - '0') * 10 + D[1] - '0', y = (D[3] - '0') * 10 + D[4] - '0';
+        int z = (F[0] - '0') * 10 + F[1] - '0', t = (F[3] - '0') * 10 + F[4] - '0';
+        if(t - y < 0){
+            this.phut = t - y + 60;
+            this.gio = z - x - 1;
+        }
+        else{
+            this.phut = t - y;
+            this.gio = z - x;
+        }
+    }
+    public int getgio(){
+        return gio;
+    }
+    public int getphut(){
+        return phut;
+    }
+    public String out(){
+        return ma + " " + ten + " " + gio + " gio " + phut + " phut";
+    }
+}
+
+public class Test1 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ArrayList<Time> a = new ArrayList<>();
+        for(int i = 1; i <= n; i++)
+            a.add(new Time(sc.next(), sc.nextLine(), sc.nextLine(), sc.next(), sc.next()));
+        Collections.sort(a, new Comparator<Time>() {
+            @Override
+            public int compare(Time a, Time b){
+                if(a.getgio() != b.getgio()) return b.getgio() - a.getgio();
+                return b.getphut() - a.getphut();
+            }
+        });
+        for(Time x : a)
+            System.out.println(x.out());
+    }
+}
