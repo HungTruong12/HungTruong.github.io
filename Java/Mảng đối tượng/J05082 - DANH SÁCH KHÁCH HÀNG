@@ -1,0 +1,63 @@
+package javaapplication1;
+import java.util.*;
+
+class KH{
+    private String ma, ten, gt, ns, dc;
+    public KH(int i, String ten, String gt, String ns, String dc){
+        if(i < 10) this.ma = "KH00" + i;
+        else this.ma = " KH0" + i;
+        this.ten = ten;
+        this.gt = gt;
+        this.ns = ns;
+        this.dc = dc;
+    }
+    public int getnam(){
+        String x = ns.substring(6);
+        return Integer.parseInt(x);
+    }
+    public int getthang(){
+        String x = ns.substring(3,5);
+        return Integer.parseInt(x);
+    }
+    public int getngay(){
+        String x = ns.substring(0,2);
+        return Integer.parseInt(x);
+    }
+    public String out(){
+        return ma + " " + ten + " " + gt + " " + dc + " " + ns;
+    }
+}
+public class Test {
+    static String chuanHoa(String s){
+        String x = "";
+        s = s.trim().replaceAll("\\s+", " ").toLowerCase();
+        String a[] = s.split(" ");
+        for(int i = 0; i < a.length; i++){
+            x += a[i].substring(0,1).toUpperCase() + a[i].substring(1);
+            if(i < a.length - 1)
+                x += " ";
+        }
+        return x;
+    }
+    static String NS(String s){
+        String x = "";
+        char a[] = s.toCharArray();
+        if(a[2] != '/') s = '0' + s;
+        if(a[5] != '/') x = s.substring(0,3) + '0' + s.substring(3);
+        else x = s;
+        return x;
+    }
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int n = Integer.parseInt(sc.nextLine());
+        ArrayList<KH> a = new ArrayList<>();
+        for(int i = 1; i <= n; i++){
+            String ten = sc.nextLine(), gt = sc.nextLine();
+            String ns = sc.nextLine(), dc = sc.nextLine();
+            a.add(new KH(i, chuanHoa(ten), gt, NS(ns), dc));
+        }
+        Collections.sort(a, Comparator.comparingInt(KH::getnam).thenComparing(KH::getthang).thenComparing(KH::getngay));
+        for(KH x : a)
+            System.out.println(x.out());
+    }
+}
