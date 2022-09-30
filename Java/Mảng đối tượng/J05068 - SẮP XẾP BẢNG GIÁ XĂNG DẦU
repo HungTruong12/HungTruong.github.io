@@ -1,0 +1,59 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Scanner;
+
+
+class Kho{
+    private String ma, brand;
+    private long price, tax, money;
+    public Kho(String ma, long a){
+        this.ma = ma;
+        if(ma.charAt(0) == 'X'){
+            this.price = 128000;
+            this.tax = a * price * 3 / 100;
+        }
+        else if(ma.charAt(0) == 'D'){
+            this.price = 11200;
+            this.tax = a * price * 7 / 2 / 100;
+        }
+        else{
+            this.price = 9700;
+            this.tax = a * price * 2 / 100;
+        }
+        int x = ma.length() - 1;
+        if(ma.charAt(x) == 'P') this.brand = "British Petro";
+        else if(ma.charAt(x) == 'S') this.brand = "Esso";
+        else if(ma.charAt(x) == 'H') this.brand = "Shell";
+        else if(ma.charAt(x) == 'A') this.brand = "Castrol";
+        else if(ma.charAt(x) == 'O') this.brand = "Mobil";
+        else{
+            this.brand = "Trong Nuoc";
+            this.tax = 0;
+        } 
+        this.money = price * a + tax;
+    }
+    public String out(){
+        return ma + " " + brand + " " + price + " " + tax + " " + money;
+    }
+    public long gettien(){
+        return money;
+    }
+}
+public class Point{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ArrayList<Kho> a = new ArrayList<>();
+        for(int i = 1; i <= n; i++)
+            a.add(new Kho(sc.next(), sc.nextLong()));
+        Collections.sort(a, new Comparator<Kho>(){
+            @Override
+            public int compare(Kho a, Kho b){
+                return Long.compare(b.gettien(), a.gettien());
+            }
+        });
+        for(Kho x : a)
+            System.out.println(x.out());
+    }
+}
