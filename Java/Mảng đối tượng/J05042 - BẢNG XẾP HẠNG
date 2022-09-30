@@ -1,0 +1,49 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Scanner;
+
+class SV
+{
+    private String ten;
+    private int x, y;
+    public SV(String ten, int x, int y){
+        this.ten = ten;
+        this.x = x;
+        this.y = y;
+    }
+    public String getten(){
+        return ten;
+    }
+    public int getx(){
+        return x;
+    }
+    public int gety(){
+        return y;
+    }
+    public String out(){
+        return ten + " " + x + " " + y;
+    }
+}
+public class Test{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc. nextInt();
+        ArrayList<SV> a = new ArrayList<>();
+        for(int i = 1; i <= n; i++){
+            sc.nextLine();
+            a.add(new SV(sc.nextLine(), sc.nextInt(), sc.nextInt()));
+        }
+        Collections.sort(a,new Comparator<SV>() {
+            @Override
+            public int compare(SV a, SV b){
+                if(b.getx() != a.getx()) return b.getx() - a.getx();
+                if(b.gety() != a.gety()) return a.gety() - b.gety();
+                return a.getten().compareTo(b.getten());
+            }
+        });
+        for(SV x : a)
+            System.out.println(x.out());
+    }
+}
