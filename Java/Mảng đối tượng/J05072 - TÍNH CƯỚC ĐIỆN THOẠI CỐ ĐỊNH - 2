@@ -1,0 +1,73 @@
+import java.util.*;
+
+class DT
+{
+    private String ma, ten;
+    private int cuoc;
+    public DT(String ma, String x, String ten, int a){
+        this.ma = ma;
+        this.ten = ten;
+        this.cuoc = a;
+    }
+    public String getma(){
+        return ma;
+    }
+    public int getcuoc(){
+        return cuoc;
+    }
+    public String gettinh(){
+        return ten;
+    }
+}
+class CuocGoi{
+    private String so, tinh;
+    private int phut, cuoc;
+    public CuocGoi(String so, String tinh, int phut, int x){
+        this.so = so;
+        this.tinh = tinh;
+        this.phut = phut;
+        this.cuoc = x;
+    }
+    public String out(){
+        return so + " " + tinh + " " + phut + " " + cuoc;
+    }
+    public int getCuoc(){
+        return cuoc;
+    }
+}
+public class Test{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ArrayList<DT> a = new ArrayList<>();
+        ArrayList<CuocGoi> b = new ArrayList<>();
+        while(n-- > 0)
+            a.add(new DT(sc.next(), sc.nextLine(), sc.nextLine(), sc.nextInt()));
+        int q = sc.nextInt();
+        while(q-- > 0){
+            String s = sc.next(), s1 = sc.next(), s2 = sc.next();
+            String s3 = s.substring(1,3);
+            int x = Integer.parseInt(s2.substring(3)) - Integer.parseInt(s1.substring(3));
+            int y = Integer.parseInt(s2.substring(0,2)) - Integer.parseInt(s1.substring(0,2));
+            if(x < 0){
+                x += 60;
+                y -= 1;
+            }
+            x = y * 60 + x; 
+            if(s.charAt(0) == '0'){
+                for(DT e : a){
+                    if(e.getma().compareTo(s3) == 0)
+                        b.add(new CuocGoi(s, e.gettinh(), x, x * e.getcuoc()));
+                }
+            }          
+            else{
+                double c = Math.ceil((double) x / 3);
+                int m = (int) c;
+                b.add(new CuocGoi(s, "Noi mang", m, m * 800));
+            }
+        }
+        Collections.sort(b, Comparator.comparingInt(CuocGoi::getCuoc).reversed());
+        for(CuocGoi x : b)
+            System.out.println(x.out());
+    }
+}
