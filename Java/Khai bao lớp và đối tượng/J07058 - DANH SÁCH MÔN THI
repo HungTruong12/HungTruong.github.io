@@ -1,0 +1,34 @@
+import java.io.File;
+import java.io.IOException;
+import java.math.BigInteger;
+import java.util.*;
+
+class MH implements Comparable<MH>{
+    private String ma, ten, HT;
+    public MH(String ma, String ten, String HT){
+        this.ma = ma;
+        this.ten = ten;
+        this.HT = HT;
+    }
+    @Override
+    public int compareTo(MH a){
+        return this.ma.compareTo(a.ma);
+    }
+    @Override
+    public String toString(){
+        return ma + " " + ten + " " + HT;
+    }
+}
+public class Test {
+    public static void main(String[] args) throws IOException {
+        Scanner sc = new Scanner(new File("MONHOC.in"));
+        int n = Integer.parseInt(sc.nextLine());
+        ArrayList<MH> a = new ArrayList<>();
+        while(n-- > 0){
+            a.add(new MH(sc.nextLine(), sc.nextLine(), sc.nextLine()));
+        }
+        Collections.sort(a);
+        for(MH x : a)
+            System.out.println(x);
+    }
+}
