@@ -1,0 +1,66 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Scanner;
+
+class HS{
+    private String ten, ma, loai;
+    private float diem;
+    private int rank;
+    public HS(int i, String ten, float a){
+        if(i < 10) this.ma = "HS0" + i;
+        else this.ma = "HS" + i;
+        this.ten = ten;
+        this.diem = a;
+        if(a < 5) this.loai = "Yeu";
+        else if(a < 7) this.loai = "Trung Binh";
+        else if(a < 9) this.loai = "Kha";
+        else this.loai = "Gioi";
+        this.rank = 0;
+    }
+    public void setso(int a){
+        this.rank = a;
+    }
+    public String out(){
+        return ma + " " + ten + " " + diem + " " + loai + " " + rank;
+    }
+    public int getso(){
+        return rank;
+    }
+    public float getdiem(){
+        return diem;
+    }
+    public String getma(){
+        return ma;
+    }
+}
+public class Point{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ArrayList<HS> a = new ArrayList<>();
+        for(int i = 1; i <= n; i++){
+            sc.nextLine();
+            a.add(new HS(i, sc.nextLine(), sc.nextFloat()));
+        }
+        Collections.sort(a, new Comparator<HS>() {
+            @Override
+            public int compare(HS a, HS b){
+                return Float.compare(b.getdiem(), a.getdiem());
+            }
+        });
+        for(int i = 0; i < a.size(); i++)
+            a.get(i).setso(i+1);
+        for(int i = 1; i < a.size(); i++)
+            if(a.get(i).getdiem() == a.get(i-1).getdiem())
+                a.get(i).setso(a.get(i-1).getso());
+        Collections.sort(a, new Comparator<HS>() {
+            @Override
+            public int compare(HS a, HS b){
+                return a.getma().compareTo(b.getma());
+            }
+        });
+        for(HS x : a)
+            System.out.println(x.out());
+    }
+}
