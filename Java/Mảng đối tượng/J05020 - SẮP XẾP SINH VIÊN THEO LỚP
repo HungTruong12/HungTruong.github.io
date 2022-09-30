@@ -1,0 +1,43 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Scanner;
+
+class SV{
+    private String msv, ten, lop, em;
+    public SV(String msv, String a, String ten, String lop, String em){
+        this.msv = msv;
+        this.ten = ten;
+        this.lop = lop;
+        this.em = em;
+    }
+    public String getlop(){
+        return lop;
+    }
+    public String getmsv(){
+        return msv;
+    }
+    public String out(){
+        return msv + " " + ten + " " + lop + " " + em;
+    }
+}
+
+public class Test1 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ArrayList<SV> a = new ArrayList<>();
+        for(int i = 0; i < n; i++)
+            a.add(new SV(sc.next(), sc.nextLine(), sc.nextLine(), sc.next(), sc.next()));
+        Collections.sort(a, new Comparator<SV>(){
+            @Override
+            public int compare(SV a, SV b){
+                if(a.getlop().compareTo(b.getlop()) != 0) return a.getlop().compareTo(b.getlop());
+                return a.getmsv().compareTo(b.getmsv());
+            }
+        });
+        for(SV x : a)
+            System.out.println(x.out());
+    }
+}
