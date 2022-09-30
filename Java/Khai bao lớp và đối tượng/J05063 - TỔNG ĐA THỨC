@@ -1,0 +1,66 @@
+import java.util.*;
+
+class DaThuc{
+    private String s;
+    public DaThuc(String a){
+        this.s = a + ' ';
+    }
+    public void create(int a[], String s){
+        char c[] = s.toCharArray();
+        int x = 0, z = 0, dem = 0;
+        for(int i = 0; i < c.length; i++){
+            if(c[i] >= '0' && c[i] <= '9')
+                x = x * 10 + c[i] - '0';
+            else if(c[i] < '0' || c[i] > '9'){
+                if(c[i] == '*'){
+                    z = x;
+                    x = 0;
+                } 
+                if(c[i] == ' ' && c[i-1] != '+'){
+                    a[x] = z;
+                    x = 0;
+                }
+            }
+        }
+    }
+
+    public DaThuc cong(DaThuc q){
+        int a[] = new int [10001];
+        int b[] = new int [10001];
+        int m = 0;
+        create(a, s);
+        create(b, q.s);
+        String str = "";
+        for(int i = 10000; i >= 0; i--)
+            if(a[i] > 0 || b[i] > 0){
+                str += String.valueOf(a[i]+b[i]) + "*x^" + i + " + ";
+            }
+        return new DaThuc(str.substring(0,str.length()-2));
+    }
+    @Override
+    public String toString(){
+        return s;
+    }
+}
+public class Tongdathuc{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = Integer.parseInt(sc.nextLine());
+        while(t-->0){
+            DaThuc p = new DaThuc(sc.nextLine());
+            DaThuc q = new DaThuc(sc.nextLine());
+            DaThuc r = p.cong(q);
+            System.out.println(r);
+        }
+    }
+    public static void main9456015(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = Integer.parseInt(sc.nextLine());
+        while(t-->0){
+            DaThuc p = new DaThuc(sc.nextLine());
+            DaThuc q = new DaThuc(sc.nextLine());
+            DaThuc r = p.cong(q);
+            System.out.println(r);
+        }
+    }
+}
