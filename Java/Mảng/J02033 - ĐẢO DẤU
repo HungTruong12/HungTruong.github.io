@@ -1,0 +1,37 @@
+package javaapplication1;
+import java.util.*;
+
+public class Test{
+    public static void main(String[] args) throws Exception{
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt(), k = sc.nextInt();
+        int a[] = new int[n];
+        long sum = 0;
+        for(int i = 0; i < n; i++){
+            a[i] = sc.nextInt();
+            sum += a[i];
+        }
+            
+        Arrays.sort(a);
+        if(a[0] < 0){
+            for(int i = 0; i < n; i++){
+                if(a[i] < 0 && k != 0){
+                    a[i] *= -1;
+                    k--;
+                    sum += 2 * a[i];
+                }
+                else break;
+            }
+            Arrays.sort(a);
+            if(k > 0 && k % 2 != 0){
+                a[0] *= -1;
+                sum += 2 * a[0];
+            }
+        }
+        else if(k % 2 != 0){
+            a[0] *= -1;
+            sum += 2 * a[0];
+        }
+        System.out.println(sum);
+    }
+}
