@@ -1,0 +1,55 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.Collections;
+import java.util.Comparator;
+
+import java.util.Scanner;
+
+class Luong
+{
+    String ma , ten, chuc;
+    int luong, ngay, cong, phu, thuong, tong;
+    public Luong(int i, String ten, int a, int ngay, String chuc){
+        if(i < 10) this.ma = "NV0" + i;
+        else this.ma = "NV" + i;
+        this.ten = ten;
+        this.ngay = ngay;
+        this.luong = ngay * a;
+        if(ngay >= 25) this.thuong =  luong * 20 / 100;
+        else if(ngay >= 22) this.thuong = luong * 10 / 100;
+        else thuong = 0;
+        if(chuc.charAt(0) == 'G')
+            phu = 250000;
+        else if(chuc.charAt(0) == 'P')
+            phu = 200000;
+        else if(chuc.charAt(0) == 'T')
+            phu = 180000;
+        else phu = 150000;
+        this.tong = luong + thuong + phu;
+    }
+    public int gettong(){
+        return tong;
+    }
+    public String out(){
+        return ma + " " + ten + " " + luong + " " + thuong + " " + phu + " " + tong;
+    }
+}
+public class Test{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc. nextInt();
+        ArrayList<Luong> a = new ArrayList<>();
+        for(int i = 1; i <= n; i++){
+            sc.nextLine();
+            a.add(new Luong(i, sc.nextLine(), sc.nextInt(), sc.nextInt(), sc.next()));
+        }
+        Collections.sort(a, new Comparator<Luong>() {
+            @Override
+            public int compare(Luong a, Luong b){
+                return b.gettong() - a.gettong();
+            }
+        });
+        for(Luong x : a)
+            System.out.println(x.out());
+    }
+}
