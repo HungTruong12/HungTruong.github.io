@@ -1,0 +1,34 @@
+import java.util.*;
+
+public class Test{
+    public static void main(String[] args) throws Exception{
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while(t-- > 0){
+            String s = sc.next();
+            char a[] = s.toCharArray();
+            int sum = 0, sum1 = 0;
+            for(int i = 0; i < a.length/2; i++)
+                sum += a[i] - 'A';
+            for(int i = a.length/2; i < a.length; i++)
+                sum1 += a[i] - 'A';
+            for(int i = 0; i < a.length/2; i++){
+                int x = sum + a[i] - 'A';
+                while(x > 25) x -= 26;
+                a[i] = (char) (x + 'A');
+            }
+            for(int i = a.length/2; i < a.length; i++){
+                int x = sum1 + a[i] - 'A';
+                while(x > 25) x -= 26;
+                a[i] = (char) (x + 'A');
+            }
+            for(int i = 0; i < a.length/2; i++){
+                int x = a[i] - 'A' + a[a.length/2 + i] - 'A';
+                while(x > 25) x -= 26;
+                a[i] = (char) (x + 'A');
+            }
+            for(int i = 0; i < a.length/2; i++) System.out.print(a[i]);
+            System.out.println();
+        }
+    }
+}
