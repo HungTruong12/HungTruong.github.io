@@ -1,0 +1,56 @@
+import java.util.*;
+
+class NV
+{
+    private String ma, ten, so, luong;
+    public NV(String ma, String ten, String a, String b){
+        this.ma = ma;
+        this.ten = ten.trim();
+        this.so = b;
+        this.luong = a;
+    }
+    @Override
+    public String toString(){
+        return ten + " " + ma + " " + so + " " + luong;
+    }
+    public String getten(){
+        return ten;
+    }
+    public int getluong(){
+        return Integer.parseInt(luong);
+    }
+    public int getso(){
+        return Integer.parseInt(so);
+    }
+}
+public class Test{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ArrayList<NV> a = new ArrayList<>();
+        for(int i = 1; i <= n; i++){
+            String s = sc.next();
+            String s1 = s.substring(0,2), s2 = s.substring(2,4), s3 = s.substring(4);
+            int x = Integer.parseInt(s3);
+            if(x > 1 && s1.compareTo("GD") == 0)
+                s1 = "NV";
+            else if(x > 3 && s1.compareTo("TP") == 0)
+                s1 = "NV";
+            else if(x > 3 && s1.compareTo("PP") == 0)
+                s1 = "NV";
+            String ten = sc.nextLine();
+            a.add(new NV(s1, ten, s2, s3));
+        }
+        Collections.sort(a,Comparator.comparingInt(NV::getluong).reversed().thenComparing(NV::getso));
+        int q = sc.nextInt();
+        sc.nextLine();
+        while(q-- > 0){
+            String s = sc.nextLine();
+            s = s.toLowerCase();
+            for(NV x : a)
+                if(x.getten().toLowerCase().contains(s) == true)
+                    System.out.println(x.toString());
+            System.out.println();
+        }
+    }
+}
