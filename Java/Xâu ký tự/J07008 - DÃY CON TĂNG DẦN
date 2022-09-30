@@ -1,0 +1,24 @@
+import java.util.*;
+import java.io.File;
+
+public class Test{
+    static void Try(int i, int count, String s, int n, ArrayList<String> b, int a[]){
+        for(int j = i+1; j <= n; j++){
+            if(a[j] > a[i]){
+                if(count > 0) b.add(s + String.valueOf(a[j]) + " ");
+                Try(j, count+1, s + String.valueOf(a[j]) + " ", n, b, a);
+            }
+        }
+    }
+    public static void main(String[] args) throws Exception{
+        Scanner sc = new Scanner(new File("DAYSO.in"));
+        int n = sc.nextInt();
+        int a[] = new int[n+1];
+        ArrayList<String> b = new ArrayList<>();
+        for(int i = 1; i <= n; i++)  a[i] = sc.nextInt();
+        Try(0, 0, " ", n, b, a);
+        Collections.sort(b);
+        for(String s : b)
+            System.out.println(s);
+    }
+}
