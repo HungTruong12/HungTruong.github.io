@@ -1,0 +1,58 @@
+import java.util.*;
+
+class TB{
+    private String ma, ten;
+    private int phut, luong;
+    public int KC(String a, String b){
+        int x = Integer.parseInt(a.substring(0,2)) * 60 + Integer.parseInt(a.substring(3));
+        int y = Integer.parseInt(b.substring(0,2)) * 60 + Integer.parseInt(b.substring(3));
+        return y - x;
+    }
+    public TB(int i, String ten, String a, String b, int c){
+        this.ma = "T" + String.format("%02d", i);
+        this.ten = ten;
+        this.phut = KC(a, b);
+        this.luong = c;
+    }
+    public String getten(){
+        return ten;
+    }
+    public void set(String a, String b, int c){
+        this.phut += KC(a, b);
+        this.luong += c;
+    }
+    public String gettb(){
+        double x = (double) luong * 60.0 / phut;
+        return String.format("%.2f", x);
+    }
+    @Override
+    public String toString(){
+        return ma + " " + ten + " " + gettb();
+    }
+}
+public class Test {
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        ArrayList<TB> a = new ArrayList<>();
+        int n = sc.nextInt(), i = 1;
+        sc.nextLine();
+        while(n-- > 0){
+            String s = sc.nextLine();
+            String s1 = sc.nextLine();
+            String s2 = sc.nextLine();
+            int c = Integer.parseInt(sc.nextLine());
+            int ok = 0;
+            for(int k = 0; k < a.size(); k++)
+                if(a.get(k).getten().equals(s)){
+                    ok = 1;
+                    a.get(k).set(s1, s2, c);
+                }
+            if(ok == 0){
+                a.add(new TB(i, s, s1, s2, c)); 
+                i++;
+            } 
+        }
+        for(TB x : a)
+            System.out.println(x);
+    }
+}
