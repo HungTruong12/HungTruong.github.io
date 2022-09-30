@@ -1,0 +1,46 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Scanner;
+
+class MH{
+    private String ten, nhom, ma;
+    private double mua, ban, loi;
+    public MH(int i, String ten, String nhom, Double a, Double b){
+        this.ma = Integer.toString(i);
+        this.ten = ten;
+        this.nhom = nhom;
+        this.mua = a;
+        this.ban = b; 
+        this.loi = b - a;
+    }
+    public Double getloi(){
+        return loi;
+    }
+    public void out(){
+        System.out.print(ma + " " + ten + " " + nhom + " ");
+        System.out.printf("%.2f\n", loi);
+    }
+}
+
+public class Test1 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ArrayList<MH> a = new ArrayList<>();
+        for(int i = 1; i <= n; i++){
+            sc.nextLine();
+            a.add(new MH(i, sc.nextLine(), sc.nextLine(), sc.nextDouble(), sc.nextDouble()));
+        }
+        Collections.sort(a, new Comparator<MH>() {
+            @Override
+            public int compare(MH a, MH b){
+                int x = Double.compare(b.getloi(), a.getloi());
+                return x;
+            }
+        });
+        for(MH x : a)
+            x.out();
+    }
+}
