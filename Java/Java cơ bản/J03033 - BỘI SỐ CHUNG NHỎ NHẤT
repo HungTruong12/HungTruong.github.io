@@ -1,0 +1,15 @@
+import java.math.BigInteger;
+import java.util.*;
+
+public class Test {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while(t-- > 0){
+            BigInteger a = new BigInteger(sc.next(), 10);
+            BigInteger b = new BigInteger(sc.next(), 10);
+            BigInteger c = a.gcd(b);
+            System.out.println(a.multiply(b).divide(c));
+        }
+    }
+}
