@@ -1,0 +1,39 @@
+package javaapplication1;
+import java.util.*;
+
+class SV{
+    private String ma, ten, rank;
+    private double TB;
+    public SV(int i, String ten, double a, double b, double c, double d, double e, double f, double g, double h, double l, double k){
+        if(i < 10) this.ma = "HS0" + i;
+        else this.ma = "HS" + i;
+        this.ten = ten;
+        double x = (double) (a * 2 + b * 2 + c + d + e + f + g + h + l + k) / 12;
+        this.TB = Math.round(x * 10.0) / 10.0;
+        if(TB < 5) this.rank = "YEU";
+        else if(TB < 7) this.rank = "TB";
+        else if(TB < 8) this.rank = "KHA";
+        else if(TB < 9) this.rank = "GIOI";
+        else this.rank = "XUAT SAC";
+    }
+    public double getTB(){
+        return TB;
+    }
+    public String out(){
+        return ma + " " + ten + " " + TB + " " + rank;
+    }
+}
+public class Test {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ArrayList<SV> a = new ArrayList<>();
+        for(int i = 1; i <= n; i++){
+            sc.nextLine();
+            a.add(new SV(i, sc.nextLine(), sc.nextDouble(), sc.nextDouble(), sc.nextDouble(), sc.nextDouble(), sc.nextDouble() , sc.nextDouble(), sc.nextDouble(), sc.nextDouble(), sc.nextDouble(), sc.nextDouble()));
+        }
+        Collections.sort(a, Comparator.comparingDouble(SV::getTB).reversed());
+        for(SV x : a)
+            System.out.println(x.out());
+    }
+}
