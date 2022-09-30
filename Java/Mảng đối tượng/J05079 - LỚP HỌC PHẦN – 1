@@ -1,0 +1,49 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Scanner;
+
+class lop{
+    private String ma, ten, group, GV;
+    public lop(String ma, String ten, String nhom, String GV){
+        this.ma = ma;
+        this.ten = ten;
+        this.group = nhom;
+        this.GV = GV;
+    }
+    public String getten(){
+        return ten;
+    }
+    public String getma(){
+        return ma;
+    }
+    public String getnhom(){
+        return group;
+    }
+    public String out(){
+        return group + " " + GV;
+    }
+}
+public class Point{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = Integer.parseInt(sc.nextLine());
+        ArrayList<lop> a = new ArrayList<>();
+        for(int i = 1; i <= n; i++)
+            a.add(new lop(sc.nextLine(), sc.nextLine(), sc.nextLine(), sc.nextLine())); 
+        int q = sc.nextInt();
+        while(q-- > 0){
+            String s = sc.next(), s1 = "";
+            for(lop x : a)
+                if(x.getma().compareTo(s) == 0){
+                    s1 = x.getten();
+                    break;
+                }
+            System.out.println("Danh sach nhom lop mon " + s1 + ":");
+        Collections.sort(a, Comparator.comparing(lop::getnhom));
+        for(lop x : a)
+            if(x.getma().compareTo(s) == 0)
+                System.out.println(x.out());
+        }
+    }
+}
