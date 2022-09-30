@@ -1,0 +1,44 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Scanner;
+
+class Gia{
+    private String ma, ten, dv;
+    private long phi, tien;
+    private double ban;
+    public Gia(int i, String ten, String dv, Long a, Long b){
+        if(i < 10) this.ma = "MH0" + i;
+        else this.ma = "MH" + i;
+        this.ten = ten;
+        this.dv = dv;
+        this.phi = Math.round(a * b * 5.0 / 100);
+        this.tien = Math.round(a * b + a * b * 5.0 / 100);
+        this.ban = Math.ceil((tien + tien * 2.0 / 100) / b / 100) * 100;
+    }
+    public double getban(){
+        return ban;
+    }
+    public String out(){
+        return ma + " " + ten + " " + dv + " " + phi + " " + tien + " " + String.format("%.0f", ban);
+    }
+}
+public class Test{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ArrayList<Gia> a = new ArrayList<>();
+        for(int i = 1; i <= n; i++)
+            a.add(new Gia(i, sc.next(), sc.next(), sc.nextLong(), sc.nextLong()));
+        Collections.sort(a, new Comparator<Gia>() {
+            @Override
+            public int compare(Gia a,Gia b){
+                int x = Double.compare(b.getban(), a.getban());
+                return x;
+            }
+        });
+        for(Gia x : a)
+            System.out.println(x.out());
+    }
+}
