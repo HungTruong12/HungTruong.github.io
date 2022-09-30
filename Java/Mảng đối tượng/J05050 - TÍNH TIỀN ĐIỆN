@@ -1,0 +1,36 @@
+import java.util.ArrayList;
+// import java.util.Collections;
+// import java.util.Comparator;
+import java.util.Scanner;
+
+class Elec{
+    private String ma;
+    private long so, tien, phu, tra;
+    public Elec(int i, String s,long a, long b){
+        if(i < 10) this.ma = "KH0" + i;
+        else this.ma = "KH" + i;
+        if(s.compareTo("KD") == 0) this.so = 3;
+        else if(s.compareTo("NN") == 0) this.so = 5;
+        else if(s.compareTo("TT") == 0) this.so = 4;
+        else this.so = 2;
+        this.tien = (b - a) * so * 550;
+        if(b - a < 50) this.phu = 0;
+        else if(b - a <= 100) this.phu = Math.round(tien / 100.0 * 35);
+        else this.phu = tien;
+        this.tra = phu + tien;
+    }
+    public String out(){
+        return ma + " " + so + " " + tien + " " + phu + " " + tra;
+    }
+}
+public class Point{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ArrayList<Elec> a = new ArrayList<>();
+        for(int i = 1; i <= n; i++)
+            a.add(new Elec(i, sc.next(), sc.nextLong(), sc.nextLong()));
+        for(Elec x : a)
+            System.out.println(x.out());
+    }
+}
