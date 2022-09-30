@@ -1,0 +1,55 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Scanner;
+
+class Kho{
+    private String ma;
+    private long nhap, xuat, gia, tien, thue;
+    public Kho(String ma, long x){
+        this.ma = ma;
+        this.nhap = x;
+        if(ma.charAt(0) == 'A') this.xuat = Math.round(x * 60.0 / 100);
+        else this.xuat = Math.round(x * 70.0 / 100);
+        if(ma.charAt(ma.length()-1) == 'Y') this.gia = 110000;
+        else this.gia = 135000;
+        this.tien = xuat * gia;
+        if(ma.charAt(0) == 'A'){
+            if(ma.charAt(ma.length()-1) == 'Y') this.thue = tien * 8 / 100;
+            else this.thue = tien * 11 / 100;
+        }
+        else{
+            if(ma.charAt(ma.length()-1) == 'Y') this.thue = tien * 17 / 100;
+            else this.thue = tien * 22 / 100;
+        }
+    }
+    public String getma(){
+        return ma;
+    }
+    public void out(){
+        System.out.print(ma + " " + nhap + " " + xuat + " " + gia + " " + tien + " " + thue + "\n");
+    }
+    public long getthue(){
+        return thue;
+    }
+}
+public class Point{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ArrayList<Kho> a = new ArrayList<>();
+        for(int i = 1; i <= n; i++){
+            a.add(new Kho(sc.next(), sc.nextLong()));
+        }
+        Collections.sort(a,new Comparator<Kho>() {
+            @Override
+            public int compare(Kho a, Kho b){
+                return Long.compare(b.getthue(), a.getthue());
+            }
+        });
+        String s = sc.next();
+        for(Kho x : a)
+            if(x.getma().substring(0,1).compareTo(s) == 0) 
+                x.out();
+    }
+}
