@@ -1,0 +1,65 @@
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
+
+class Elec{
+    private String ma, ten;
+    private long in, out, sum, VAT;
+    public String ChuanHoa(String s){
+        s = s.trim().replaceAll("\\s++", " ");
+        String a[] = s.split(" ");
+        String tmp = "";
+        for(String w : a){
+            tmp = tmp + w.substring(0, 1).toUpperCase() + w.substring(1, w.length()).toLowerCase();
+            tmp = tmp + ' ';
+        }
+        return tmp;
+    }
+    public Elec(int i, String ten, String s){
+        String D[] = s.split(" ");
+        int a = Integer.parseInt(D[1]);
+        int b = Integer.parseInt(D[2]);
+        if(i < 10) this.ma = "KH0" + i;
+        else this.ma = "KH" + i;
+        this.ten = ChuanHoa(ten);
+        int x = 200, c = b - a;
+        if(D[0].charAt(0) == 'A') x = 100;
+        else if(D[0].charAt(0) == 'B') x = 500;
+        if(c <= x){
+            this.in = c * 450;
+            this.VAT = 0;
+            this.out = 0;
+            this.sum = in;
+        }
+        else{
+            this.in = x * 450;
+            this.out = (c - x) * 1000;
+            this.VAT =  out * 5 / 100;
+            this.sum = in + out + VAT;
+        }
+    }
+    public long getsum(){
+        return sum;
+    }
+    public String out(){
+        return ma + " " + ten + in + " " + out + " " + VAT + " " + sum;
+    }
+}
+public class Test1 {
+    
+    public static void main(String[] args) {
+        try{
+            Scanner sc = new Scanner(new File("KHACHHANG.in"));
+            ArrayList<Elec> a = new ArrayList<>();
+            int t = Integer.parseInt(sc.nextLine());
+            for(int i = 1; i <= t; i++)
+                a.add(new Elec(i, sc.nextLine(), sc.nextLine()));
+            Collections.sort(a, Comparator.comparingLong(Elec::getsum).reversed());
+            for(Elec x : a)
+                System.out.println(x.out());
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+}
