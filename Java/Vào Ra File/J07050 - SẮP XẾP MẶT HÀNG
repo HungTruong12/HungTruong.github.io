@@ -1,0 +1,52 @@
+import java.io.File;
+import java.util.*;
+
+class MH{
+    private String ten, nhom, ma;
+    private double mua, ban, loi;
+    public MH(int i, String ten, String nhom, Double a, Double b){
+        if(i < 10) this.ma = "MH0" + i;
+        else this.ma = "MH" + i;
+        this.ten = ten;
+        this.nhom = nhom;
+        this.mua = a;
+        this.ban = b; 
+        this.loi = b - a;
+    }
+    public Double getloi(){
+        return loi;
+    }
+    public void out(){
+        System.out.print(ma + " " + ten + " " + nhom + " ");
+        System.out.printf("%.2f\n", loi);
+    }
+}
+public class Test1 {
+    public static void main(String[] args) {
+        try{
+            File a = new File("MATHANG.in");
+            Scanner sc = new Scanner(a);
+            int t = Integer.parseInt(sc.nextLine());
+            ArrayList<MH> A = new ArrayList<>();
+            int i = 1;
+            while(t-- > 0){
+                A.add(new MH(i, sc.nextLine(), sc.nextLine(), Double.parseDouble(sc.nextLine()), Double.parseDouble(sc.nextLine())));
+                i++;
+            }
+            Collections.sort(A, new Comparator<MH>() {
+                @Override
+                public int compare(MH a, MH b){
+                    int x = Double.compare(b.getloi(), a.getloi());
+                    return x;
+                }
+            });
+            for(MH x : A)
+                x.out();
+            
+        }
+        catch (Exception e) {
+            System.out.println("Loi");
+            e.printStackTrace();
+        }
+    }
+}
