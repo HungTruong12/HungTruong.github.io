@@ -1,0 +1,41 @@
+import java.io.File;
+import java.util.*;
+
+class Produce{
+    private String ma, ten;
+    private int gia, time;
+    public Produce(String ma, String ten, int gia, int time){
+        this.ma = ma;
+        this.ten = ten;
+        this.gia = gia;
+        this.time = time;
+    }
+    public int getgia(){
+        return gia;
+    }
+    public String getma(){
+        return ma;
+    }
+    public String out(){
+        return ma + " " + ten + " " + gia + " " + time;
+    }
+}
+public class Test1 {
+    public static void main(String[] args) {
+        try{
+            File x = new File("SANPHAM.in");
+            Scanner sc = new Scanner(x);
+            int t = Integer.parseInt(sc.nextLine());
+            ArrayList<Produce> a = new ArrayList<>();
+            while(t-- > 0)
+                a.add(new Produce(sc.nextLine(), sc.nextLine(), Integer.parseInt(sc.nextLine()), Integer.parseInt(sc.nextLine())));
+            Collections.sort(a, Comparator.comparingInt(Produce::getgia).reversed().thenComparing(Produce::getma));
+            for(Produce c : a)
+                System.out.println(c.out());
+        }
+        catch (Exception e) {
+            System.out.println("Loi");
+            e.printStackTrace();
+        }
+    }
+}
