@@ -1,0 +1,45 @@
+import java.io.File;
+import java.util.*;
+
+class SV{
+    private String ma, name;
+    private int sv;
+    public SV(String ma, String ten, int sv){
+        this.ma = ma;
+        this.name = ten;
+        this.sv = sv;
+    }
+    public int getsv(){
+        return sv;
+    }
+    public String getma(){
+        return ma;
+    }
+    public String out(){
+        return ma + " " + name + " " + sv;
+    }
+}
+public class Test1 {
+    public static void main(String[] args) {
+        try{
+            File a = new File("DN.in");
+            Scanner sc = new Scanner(a);
+            int t = Integer.parseInt(sc.nextLine());
+            ArrayList<SV> D = new ArrayList<>();
+            while(t-- > 0)
+                D.add(new SV(sc.nextLine(), sc.nextLine(), Integer.parseInt(sc.nextLine())));
+            Collections.sort(D, new Comparator<SV>() {
+                @Override
+                public int compare(SV a, SV b){
+                    return a.getma().compareTo(b.getma());
+                }
+            }); 
+            for(SV x : D)
+                System.out.println(x.out()); 
+        }
+        catch (Exception e) {
+            System.out.println("Loi");
+            e.printStackTrace();
+        }
+    }
+}
