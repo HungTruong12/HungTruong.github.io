@@ -1,0 +1,27 @@
+package javaapplication1;
+import java.util.*;
+
+public class Test {
+    static void Bcnn(int n){
+        int input = 0, output = 0;
+        long res[] = new long[10001];
+        res[0] = 9;
+        while(input >= output){
+            long x = res[output++];
+            if(x % n == 0){
+                System.out.println(x);
+                return;
+            }
+            res[++input] = x * 10;
+            res[++input] = x * 10 + 9;        
+        }
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while(t-- > 0){
+            int n = sc.nextInt();
+            Bcnn(n);
+        }
+    }
+}
