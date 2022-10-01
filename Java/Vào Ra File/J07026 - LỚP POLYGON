@@ -1,0 +1,41 @@
+package javaapplication1;
+import java.io.*;
+import java.util.*;
+
+class Point{
+    public int x, y;
+    public Point(int x, int y){
+        this.x = x;
+        this.y = y;
+    }
+}
+class Polygon{
+    public ArrayList<Point> a = new ArrayList<>();
+    public Polygon(Point[] p){
+        for(int i = 0; i < p.length; i++)
+            this.a.add(p[i]);
+        this.a.add(a.get(0));
+    }
+    public String getArea(){
+        int sum = 0;
+            for(int i = 0; i < a.size()-1; i++)
+                sum += a.get(i).x * a.get(i+1).y - a.get(i).y * a.get(i+1).x;
+        double x = (double) Math.abs(sum) / 2;
+        return String.format("%.3f", x);
+    }
+}
+public class Test{
+    public static void main(String[] args) throws FileNotFoundException {
+        Scanner in = new Scanner(new File("POLYGON.in"));
+        int t = in.nextInt();
+        while(t-->0){
+            int n = in.nextInt();
+            Point p[] = new Point[n];
+            for(int i = 0; i < n; i++){
+                p[i] = new Point(in.nextInt(),in.nextInt());
+            }
+            Polygon poly = new Polygon(p);
+            System.out.println(poly.getArea());
+        }
+    }
+}
