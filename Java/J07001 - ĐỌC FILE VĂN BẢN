@@ -1,0 +1,22 @@
+package javaapplication1;
+import java.io.File;  // Import the File class
+import java.io.FileNotFoundException;  // Import this class to handle errors
+import java.util.Scanner; // Import the Scanner class to read text files
+
+public class Test {
+    public static void main(String[] args) {
+        try{
+            File a = new File("DATA.in");
+            Scanner sc = new Scanner(a);
+            while(sc.hasNextLine()){
+                String s = sc.nextLine();
+                System.out.println(s);
+            }
+            sc.close();
+        }
+        catch (FileNotFoundException e){
+            System.out.println("Loi");
+            e.printStackTrace();
+        }
+    }
+}
