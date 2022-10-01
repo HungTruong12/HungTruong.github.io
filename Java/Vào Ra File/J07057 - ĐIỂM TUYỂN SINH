@@ -1,0 +1,53 @@
+import java.io.File;
+import java.util.*;
+
+class SV{
+    private String ma, ten, loai;
+    private double tong;
+    public String chuanHoa(String s){
+        String x = "";
+        s = s.trim().toLowerCase().replaceAll("\\s+", " ");
+        String a[] = s.split(" ");
+        for(String w : a){
+            x += w.substring(0,1).toUpperCase() + w.substring(1);
+            x += " ";
+        }
+        return x;
+    }
+    public SV(int i, String ten, double a, String s, int x){
+        if(i < 10) this.ma = "TS0" + i;
+        else this.ma = "TS" + i;
+        this.ten = chuanHoa(ten);
+        double b = 0;
+        if(x == 1) b = 1.5;
+        else if(x == 2) b = 1;
+        if(s.compareTo("Kinh") != 0) this.tong = a + 1.5 + b;
+        else this.tong = a + b;
+        if(tong >= 20.5) this.loai = "Do";
+        else this.loai = "Truot";
+    }
+    public double getdiem(){
+        return tong;
+    }
+    public String out(){
+        return ma + " " + ten + String.format("%.1f ", tong) + loai;
+    }
+}
+public class Test1 {
+    public static void main(String[] args) {
+        try{
+            Scanner sc = new Scanner(new File("THISINH.in"));
+            int t = Integer.parseInt(sc.nextLine());
+            ArrayList<SV> a = new ArrayList<>();
+            for(int i = 1; i <= t; i++)
+                a.add(new SV(i, sc.nextLine(), Double.parseDouble(sc.nextLine()), sc.nextLine(), Integer.parseInt(sc.nextLine())));
+            Collections.sort(a, Comparator.comparingDouble(SV::getdiem).reversed());
+            for(SV x : a)
+                System.out.println(x.out());
+        }
+        catch (Exception e) {
+            System.out.println("Loi");
+            e.printStackTrace();
+        }
+    }
+}
