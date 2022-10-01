@@ -1,0 +1,66 @@
+import java.io.File;
+import java.util.*;
+
+class SV{
+    private String ma, ten;
+    private double TB;
+    private int rank;
+    public String chuanHoa(String s){
+        String x = "";
+        s = s.trim().toLowerCase().replaceAll("\\s+", " ");
+        String a[] = s.split(" ");
+        for(String w : a){
+            x += w.substring(0,1).toUpperCase() + w.substring(1);
+            x += " ";
+        }
+        return x;
+    }
+    public SV(int i, String ten, int a, int b, int c){
+        if(i < 10) this.ma = "SV0" + i;
+        else this.ma = "SV" + i;
+        this.ten = chuanHoa(ten);
+        double x = (double) (a * 3 + b * 3 + c * 2) / 8;
+        this.TB = Double.parseDouble(String.format("%.2f", x));
+    }
+    public void setrank(int a){
+        this.rank = a;
+    }
+    public int getrank(){
+        return rank;
+    }
+    public double getdiem(){
+        return TB;
+    }
+    public String out(){
+        return ma + " " + ten + " " + String.format("%.2f", TB) + " " + rank;
+    }
+    public String getma(){
+        return ma;
+    }
+}
+public class Test1 {
+    public static void main(String[] args) {
+        try{
+            Scanner sc = new Scanner(new File("BANGDIEM.in"));
+            int n = Integer.parseInt(sc.nextLine());
+            ArrayList<SV> a = new ArrayList<>();
+            int j = 1;
+            while(n-->0){
+                a.add(new SV(j, sc.nextLine(), Integer.parseInt(sc.nextLine()), Integer.parseInt(sc.nextLine()), Integer.parseInt(sc.nextLine())));
+                j++;
+            }
+            Collections.sort(a, Comparator.comparingDouble(SV::getdiem).reversed().thenComparing(SV::getma));
+            for(int i = 0; i < a.size(); i++)
+                a.get(i).setrank(i+1);
+            for(int i = 1; i < a.size(); i++)
+                if(a.get(i).getdiem() == a.get(i-1).getdiem())
+                    a.get(i).setrank(a.get(i-1).getrank());
+            for(SV x : a)
+                System.out.println(x.out());
+        }
+        catch (Exception e) {
+            System.out.println("Loi");
+            e.printStackTrace();
+        }
+    }
+}
