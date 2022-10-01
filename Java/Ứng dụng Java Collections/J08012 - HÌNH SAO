@@ -1,0 +1,24 @@
+import java.util.*;
+
+public class Test{
+    static int ktra(int a[], int n){
+        int dem = 0;
+        for(int i = 1; i <= n; i++){
+            if(a[i] == n-1) dem++;
+            if(a[i] > 1 && a[i] != n-1) return 0;
+            if(dem == 2) return 0;
+        }
+        return 1;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int a[] = new int[n+1];
+        for(int i = 0; i < n-1; i++){
+            int x = sc.nextInt(), y = sc.nextInt();
+            a[x]++; a[y]++;
+        }
+        if(ktra(a, n) == 1) System.out.println("Yes");
+        else System.out.println("No");
+    }
+}
