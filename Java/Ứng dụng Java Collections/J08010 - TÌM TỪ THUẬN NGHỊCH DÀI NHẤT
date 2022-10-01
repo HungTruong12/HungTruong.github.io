@@ -1,0 +1,33 @@
+package java_netbeans;
+import java.util.*;
+
+public class Java_Netbeans {
+    static boolean tn(String a){
+        for(int i = 0; i < a.length()/2; i++)
+            if(a.charAt(i) != a.charAt(a.length()-i-1))
+                return false;
+        return true;
+    }
+    public static void main(String[] args) throws Exception{
+        Scanner sc = new Scanner(System.in);
+        ArrayList<String> a = new ArrayList<>();
+        HashMap<String, Integer> m = new HashMap<>();
+        while(sc.hasNext()){
+            String s = sc.next();
+            if(tn(s)){
+                if(m.containsKey(s)) m.put(s, m.get(s)+1);
+                else{
+                    m.put(s,1);
+                    a.add(s);
+                }
+            }
+        }
+        Collections.sort(a, (String o1, String o2) -> o2.length() - o1.length());
+        int max = a.get(0).length();
+        for(String s : a){
+            if(s.length() == max)
+                System.out.println(s + " " + m.get(s));   
+            else break;
+        }        
+    }
+}
