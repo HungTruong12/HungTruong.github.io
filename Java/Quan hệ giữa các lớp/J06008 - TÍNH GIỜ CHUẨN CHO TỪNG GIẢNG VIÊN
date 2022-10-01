@@ -1,0 +1,78 @@
+package javaapplication1;
+import java.util.*;
+
+class MH{
+    public String maMH, tenMH;
+    public MH(String ma, String ten){
+        this.maMH = ma;
+        this.tenMH = ten.trim();
+    }
+}
+class GV{
+    private String maGV, tenGV;
+    private float time;
+    public GV(String ma, String ten){
+        this.maGV = ma;
+        this.tenGV = ten.trim();
+    }
+    public void settime(float a){
+        this.time += a;
+    }
+    public String getma(){
+        return maGV;
+    }
+    public String getten(){
+        return tenGV;
+    }
+    @Override
+    public String toString(){
+        return tenGV + " " + String.format("%.2f", time);
+    }
+}
+class LopHocPhan{
+    public String maGV, maMH;
+    public float time;
+    public LopHocPhan(String maGV, String maMH, float time){
+        this.maGV = maGV;
+        this.maMH = maMH;
+        this.time = time;
+    }
+}
+public class Test{
+    public static void main(String[] args) throws Exception{
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ArrayList<MH> a = new ArrayList<>();
+        ArrayList<GV> b = new ArrayList<>();
+        ArrayList<LopHocPhan> c = new ArrayList<>();
+        while(n-- > 0)
+            a.add(new MH(sc.next(), sc.nextLine()));
+        int m = sc.nextInt();
+        while(m-- > 0)
+            b.add(new GV(sc.next(), sc.nextLine()));
+        int q = sc.nextInt();
+        while(q-- > 0){
+            String s = sc.next(), s1 = sc.next();
+            float x = sc.nextFloat();
+            c.add(new LopHocPhan(s, s1, x));
+        }
+        String s = sc.next(), s1 = "";
+        for(GV x : b)
+            if(s.equals(x.getma())){
+                s1 = x.getten();
+                break;
+            }
+        System.out.println("Giang vien: " + s1);
+        float sum = 0;
+        for(LopHocPhan x : c)
+            if(x.maGV.equals(s)){
+                for(MH y : a)
+                    if(x.maMH.equals(y.maMH)){
+                        System.out.println(y.tenMH + " " + x.time);
+                        sum += x.time;
+                        break;
+                    }
+            }
+        System.out.printf("Tong: %.2f" , sum);
+    }
+}
