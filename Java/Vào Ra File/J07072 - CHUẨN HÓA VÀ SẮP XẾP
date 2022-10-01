@@ -1,0 +1,41 @@
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
+
+public class Test1 {
+    static String ChuanHoa(String s){
+        s = s.trim().replaceAll("\\s++", " ");
+        String a[] = s.split(" ");
+        String tmp = "";
+        for(String w : a){
+            tmp = tmp + w.substring(0, 1).toUpperCase() + w.substring(1, w.length()).toLowerCase();
+            tmp = tmp + ' ';
+        }
+        tmp = tmp.trim();
+        return tmp;
+    }
+    public static void main(String[] args) {
+        try{
+            Scanner sc = new Scanner(new File("DANHSACH.in"));
+            ArrayList<String> a = new ArrayList<>();
+            while(sc.hasNextLine())
+                a.add(ChuanHoa(sc.nextLine()));
+            Collections.sort(a, new Comparator<String>() {
+                @Override
+                public int compare(String a, String b){
+                    String s1[] = a.split(" ");
+                    String s2[] = b.split(" ");
+                    if(!s1[s1.length-1].equals(s2[s2.length-1])) return s1[s1.length-1].compareTo(s2[s2.length-1]);
+                    if(!s1[0].equals(s2[0])) return s1[0].compareTo(s2[0]);
+                    if(!s1[1].equals(s2[1])) return s1[1].compareTo(s2[1]);
+                    return s1[2].compareTo(s2[2]);
+                }
+            });
+            for(String x : a)
+                System.out.println(x);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+}
