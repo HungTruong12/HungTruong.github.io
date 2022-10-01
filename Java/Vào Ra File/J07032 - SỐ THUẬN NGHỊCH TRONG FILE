@@ -1,0 +1,47 @@
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.util.*;
+
+public class Test{
+    static int ktra(int n){
+        int m = n, sum = 0, dem = 0;
+        while(n > 0){
+            int a = n % 10;
+            if(a % 2 == 0) return 0;
+            dem++;
+            sum = sum * 10 + a;
+            n /= 10;
+        }
+        if(dem < 3 || sum != m || dem % 2 == 0) return 0;
+        return 1;
+    }
+    public static void main(String[] args) throws Exception{
+        FileInputStream file = new FileInputStream("DATA1.in");
+        ObjectInputStream ois = new ObjectInputStream(file);
+        ObjectInputStream is = new ObjectInputStream(new FileInputStream("DATA2.in"));
+        ArrayList<Integer> a = (ArrayList<Integer>) ois.readObject();
+        ArrayList<Integer> b = (ArrayList<Integer>) is.readObject();
+        ArrayList<Integer> c = new ArrayList<>();
+        TreeMap<Integer, Integer> m = new TreeMap<>();
+        TreeMap<Integer, Integer> map = new TreeMap<>();
+        for(Integer x : a){
+            if(ktra(x) == 1){
+                if(m.containsKey(x))
+                    m.put(x, m.get(x) + 1);
+                else m.put(x, 1);
+            }
+        }
+        for(Integer x : b){
+                if(m.containsKey(x)){
+                    m.put(x, m.get(x) + 1);
+                    map.put(x, m.get(x));
+                }
+        }
+        int dem = 0;
+        for(Integer x : map.keySet()){
+            if(dem == 10) break;
+            System.out.println(x + " " + map.get(x));
+            dem++;
+        }
+    }
+}
