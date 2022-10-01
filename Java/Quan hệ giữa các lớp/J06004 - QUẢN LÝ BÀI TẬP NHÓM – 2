@@ -1,0 +1,40 @@
+package javaapplication1;
+
+import java.util.*;
+
+class SV{
+    private String ma, ten, sdt;
+    private int nhom;
+    public SV(String ma, String ten, String sdt, int nhom){
+        this.ma = ma;
+        this.ten = ten;
+        this.sdt = sdt;
+        this.nhom = nhom;
+    }
+    public int getnhom(){
+        return nhom;
+    }
+    public String getMa(){
+        return ma;
+    }
+    @Override
+    public String toString(){
+        return ma + " " + ten + " " + sdt + " " + nhom + " ";
+    }
+}
+public class Test {
+    public static void main(String[] args) throws Exception{
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt(), m = sc.nextInt();
+        sc.nextLine();
+        ArrayList<SV> a = new ArrayList<>();
+        ArrayList<String> b = new ArrayList<>();
+        while(n-- > 0)
+            a.add(new SV(sc.nextLine(), sc.nextLine(), sc.nextLine(), Integer.parseInt(sc.nextLine())));
+        while(m-- > 0)
+            b.add(sc.nextLine());
+        Collections.sort(a, (SV o1, SV o2) -> o1.getMa().compareTo(o2.getMa()));
+        for(SV x : a)
+            System.out.println(x + b.get(x.getnhom()-1));
+    }
+}
