@@ -1,0 +1,74 @@
+package javaapplication1;
+
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+
+class KS{
+    public String ma, ten;
+    public double gia, phi;
+    public KS(String ma, String ten, double gia, double phi){
+        this.ma = ma;
+        this.ten = ten;
+        this.gia = gia;
+        this.phi = phi;
+    }
+}
+class KH{
+    private String ma, ten, phong;
+    private Date nhan, tra;
+    private long songay;
+    private double tong, giam;
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    public KH(int i, String ten, String phong, String den, String di) throws Exception{
+        this.ma = "KH" + String.format("%02d", i);
+        this.ten = ten;
+        this.phong = phong;
+        this.nhan = sdf.parse(den);
+        this.tra = sdf.parse(di);
+        this.songay = setngay();
+        if(songay >= 30) this.giam = 0.06;
+        else if(songay >= 20) this.giam = 0.04;
+        else if(songay >= 10) this.giam = 0.02;
+    }
+    public String getphong(){
+        return phong;
+    }
+    public void settong(double gia, double phi){
+        long a = songay;
+        if(a == 0) a += 1;
+        double x = (double) gia * a * (1 + phi);
+        this.tong = (double) Math.round(x * 100 * (1 - giam)) / 100;
+    }
+    public long setngay(){
+        long diff = tra.getTime() - nhan.getTime();
+        return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+    }
+    @Override
+    public String toString(){
+        return ma + " " + ten + " " + phong + " " + songay + " " + String.format("%.2f", tong);
+    }
+}
+public class Test {
+    public static void main(String[] args) throws Exception{
+        Scanner sc = new Scanner(new File("DATA.in"));
+        int n = sc.nextInt();
+        ArrayList<KH> a = new ArrayList<>();
+        ArrayList<KS> b = new ArrayList<>();
+        while(n-- > 0)
+            b.add(new KS(sc.next(), sc.next(), sc.nextDouble(), sc.nextDouble()));
+        sc.nextLine();
+        int m = Integer.parseInt(sc.nextLine());
+        for(int i = 1; i <= m; i++)
+            a.add(new KH(i, sc.nextLine(), sc.nextLine(), sc.nextLine(), sc.nextLine()));
+        Collections.sort(a, Comparator.comparingLong(KH::setngay).reversed());
+        for(KS x : b)
+            for(KH y : a)
+                if(x.ma.equals(y.getphong().substring(2,3))){
+                    y.settong(x.gia, x.phi);
+                }
+        for(KH x : a)
+            System.out.println(x);
+    }
+}
