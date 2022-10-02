@@ -1,0 +1,41 @@
+package javaapplication1;
+
+import java.util.*;
+
+class SP{
+    private String ma;
+    private double tong;
+    public SP(String ma, int a, int b){
+        this.ma = ma;
+        double thue = 0, phi = 0;
+        if(ma.charAt(0) == 'T'){
+            thue = 0.29; phi = 0.04;
+        }
+        else if(ma.charAt(0) == 'C'){
+            thue = 0.1; phi = 0.03;
+        }
+        else if(ma.charAt(0) == 'D'){
+            thue = 0.08; phi = 0.025;
+        }
+        else {
+            thue = 0.02; phi = 0.005;
+        }
+        if(ma.charAt(ma.length()-1) == 'C') thue = thue * 0.95;
+        this.tong = (double) Math.round(a * b * (thue + phi + 1) * 1.2 / b * 100) / 100;
+    }
+    @Override
+    public String toString(){
+        return ma + " " + String.format("%.2f", tong);
+    }
+}
+public class Test {
+    public static void main(String[] args) throws Exception{
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ArrayList<SP> a = new ArrayList<>();
+        while(n-- > 0)
+            a.add(new SP(sc.next(), sc.nextInt(), sc.nextInt()));
+        for(SP x : a)
+            System.out.println(x);
+    }
+}
