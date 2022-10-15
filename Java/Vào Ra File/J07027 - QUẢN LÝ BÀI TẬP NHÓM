@@ -1,0 +1,48 @@
+import java.io.*;
+import java.util.*;
+
+class SINHVIEN{
+    public String msv, tensv, sdt;
+    public int nhom;
+    public SINHVIEN(String msv, String tensv, String sdt){
+        this.msv = msv;
+        this.tensv = tensv;
+        this.sdt = sdt;
+    }
+    public void setNhom(int nhom){
+        this.nhom = nhom;
+    }
+    @Override
+    public String toString(){
+        return msv + " " + tensv + " " + sdt + " " + nhom + " ";
+    }
+}
+public class Test1 {
+
+    public static void main(String[] args) throws Exception{
+        Scanner sc = new Scanner(new File("SINHVIEN.in"));
+        Scanner sc1 = new Scanner(new File("BAITAP.in"));
+        Scanner sc2 = new Scanner(new File("NHOM.in"));
+        ArrayList<SINHVIEN> a = new ArrayList<>();
+        ArrayList<String> b = new ArrayList<>();
+        int n = Integer.parseInt(sc.nextLine());
+        int m = n;
+        while(n-- > 0)
+            a.add(new SINHVIEN(sc.nextLine(), sc.nextLine(), sc.nextLine()));
+        Collections.sort(a, (SINHVIEN o1, SINHVIEN o2) -> o1.msv.compareTo(o2.msv));
+        n = Integer.parseInt(sc1.nextLine());
+        while(n-- > 0)
+            b.add(sc1.nextLine());
+        while(m-- > 0){
+            String s = sc2.next();
+            int c = sc2.nextInt();
+            for(SINHVIEN x : a)
+                if(x.msv.equals(s)){
+                    x.setNhom(c);
+                    break;
+                }
+        }
+        for(SINHVIEN x : a)
+            System.out.println(x + b.get(x.nhom - 1));
+    }
+}
