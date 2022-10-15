@@ -1,0 +1,62 @@
+import java.io.*;
+import java.util.*;
+
+class Pair<K,V> {
+    String k;
+    Integer v;
+    public Pair(String k, int v){
+        this.k = k;
+        this.v = v;
+    }
+}
+public class Test1 {
+    static String quay_phai(String s){
+        char a[] = s.toCharArray();
+        String tmp = "";
+        tmp = tmp + a[0] + a[4] + a[1] + a[3] + a[5] + a[2];
+        return tmp;
+    }
+    static String quay_trai(String s){
+        char a[] = s.toCharArray();
+        String tmp = "";
+        tmp = tmp + a[3] + a[0] + a[2] + a[4] + a[1] + a[5];
+        return tmp;
+    }
+    public static void main(String[] args) throws Exception{
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while(t-- > 0){
+            String a = "";
+            String b = "";
+            for(int i = 0; i < 6; i++){
+                int x = sc.nextInt();
+                a += String.valueOf(x);
+            }
+            for(int i = 0; i < 6; i++){
+                int x = sc.nextInt();
+                b += String.valueOf(x);
+            }
+            Map<String, Integer> m = new TreeMap<>();
+            ArrayDeque<Pair<String, Integer>> ls = new ArrayDeque<>();
+            ls.add(new Pair(a, 0));
+            while(!ls.isEmpty()){
+                Pair s = ls.getFirst();
+                ls.removeFirst();
+                if(quay_phai(s.k).equals(b) || quay_trai(s.k).equals(b)){
+                    System.out.println(s.v+1);
+                    break;
+                }
+                String s1 = quay_phai(s.k);
+                String s2 = quay_trai(s.k);
+                if(!m.containsKey(s1)){
+                    m.put(s1, 1);
+                    ls.add(new Pair(s1, s.v + 1));
+                }
+                if(!m.containsKey(s2)){
+                    m.put(s2, 1);
+                    ls.add(new Pair(s2, s.v + 1));
+                }
+            }
+        }
+    }
+}
